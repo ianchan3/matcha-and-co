@@ -1,0 +1,18 @@
+#greeting {
+  color: black;
+  margin-top: 0;
+}
+
+#Welcome {
+  text-align: center;
+  background-color: yellow;
+}
+
+#Description {
+  text-align: center;
+}
+
+.MenuSelector {
+  color: red;
+  font-size: 50px;
+}

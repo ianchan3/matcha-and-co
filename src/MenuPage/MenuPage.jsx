@@ -5,6 +5,7 @@ import flanImage from "../assets/Flan.jpg";
 import VietnameseSoyRice from "../assets/Vietnamese-Soy-Rice.jpg";
 import BunBoHue from "../assets/BunBoHue.jpg";
 import MangoStickyRice from "../assets/MangoStickyRice.jpg";
+import NavBar from "../NavBar/NavBar";
 
 export default function MenuPage({ cart, addToCart, goToCheckout }) {
   const [flanQty, setFlanQty] = useState(1);
@@ -26,6 +27,7 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
 
   return (
     <main className="MenuPage">
+      <NavBar />
       <div id="MenuPageHeader">
         <h1>OUR BEAUTIFUL MENU!!</h1>
       </div>

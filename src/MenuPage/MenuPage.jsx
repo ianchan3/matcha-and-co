@@ -6,12 +6,16 @@ import VietnameseSoyRice from "../assets/Vietnamese-Soy-Rice.jpg";
 import BunBoHue from "../assets/BunBoHue.jpg";
 import MangoStickyRice from "../assets/MangoStickyRice.jpg";
 
-export default function MenuPage({ cart, addToCart }) {
+export default function MenuPage({ cart, addToCart, goToCheckout }) {
   const [flanQty, setFlanQty] = useState(1);
   const [vietnamesesoyriceQty, setVietnamesesoyriceQty] = useState(1);
   const [bunbohueQty, setBunbohueQty] = useState(1);
   const [mangostickyriceQty, setMangostickyriceQty] = useState(1);
 
+
+
+  const cartCount = cart.reduce((sum, x) => sum + x.qty, 0);
+  const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   const menuItems = [
     {id: "flan", name: "flan", priceCents: 399},
@@ -87,6 +91,13 @@ export default function MenuPage({ cart, addToCart }) {
           </div>
         </div>
       </section>`
+              {/* TEMP DEBUG: remove later */}
+  <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
+    Cart items: {cartCount} | Total: ${(cartTotalCents / 100).toFixed(2)}
+  </div>
+  <button disabled={cart.length === 0} onClick={goToCheckout}>
+  Checkout
+</button>
     </main>
   )
 }

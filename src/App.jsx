@@ -2,6 +2,7 @@ import { useState } from 'react'
 import React from "react";
 import HomePage from "./HomePage/HomePage";
 import MenuPage from "./MenuPage/MenuPage";
+import SuccessPage from "./SuccessPage/SuccessPage";
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
@@ -23,9 +24,6 @@ function App() {
         return [...prev, {...item, qty: qtyNum}];
     });
   }
-
-  const cartCount = cart.reduce((sum, x) => sum + x.qty, 0);
-  const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   async function goToCheckout() {
     console.log("checkout clicked");
@@ -64,16 +62,10 @@ function App() {
   return (
     <>
       <main className='App'>
-  {/* TEMP DEBUG: remove later */}
-  <button disabled={cart.length === 0} onClick={goToCheckout}>
-  Checkout
-</button>
-  <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
-    Cart items: {cartCount} | Total: ${(cartTotalCents / 100).toFixed(2)}
-  </div>
       <Routes id="routes">
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart}/>}/>
+        <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout}/>}/>
+        <Route path="/success" element={<SuccessPage />}/>
       </Routes>
       </main>
     </>

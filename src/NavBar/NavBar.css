@@ -1,0 +1,19 @@
+.NavBar > nav {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  place-items: center;
+}
+
+.NavBar {
+  padding: 30px;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logo:hover {
+  color: yellow;
+}

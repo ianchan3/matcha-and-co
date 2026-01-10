@@ -1,6 +1,7 @@
 import "./HomePage.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 
 export default function HomePage() {
 //   window.onscroll = () => scrollProgress();
@@ -23,6 +24,7 @@ export default function HomePage() {
 
   return (
     <main className="HomePage">
+      <NavBar />
       <section id="Welcome" className="Welcome">
         <h1 id="greeting">
           Flan Restaurant
@@ -33,9 +35,7 @@ export default function HomePage() {
           <h1>
           Welcome to the Menu Page! Scroll to discover our delicious menu
           </h1>
-        </div>
-        <div>
-          <Link className='MenuSelector' to="/menu">Menu</Link>
+          <h1 id="mongmai">More about our beautiful chef: Mong Mai</h1>
         </div>
       </section>
     </main>

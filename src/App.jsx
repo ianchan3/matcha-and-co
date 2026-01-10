@@ -3,6 +3,7 @@ import React from "react";
 import HomePage from "./HomePage/HomePage";
 import MenuPage from "./MenuPage/MenuPage";
 import SuccessPage from "./SuccessPage/SuccessPage";
+import ContactPage from "./ContactPage/ContactPage";
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
@@ -26,21 +27,14 @@ function App() {
   }
 
   async function goToCheckout() {
-    console.log("checkout clicked");
-    console.log("about to fetch");
-  
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 3000);
   
     try {
-      const res = await fetch("http://127.0.0.1:4242/checkout", {
+      const res = await fetch("http://localhost:4242/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart }),
-        signal: controller.signal,
       });
   
-      clearTimeout(timeoutId);
   
       console.log("fetch returned", res.status);
       const data = await res.json();
@@ -66,6 +60,7 @@ function App() {
         <Route path="/" element={<HomePage/>}/>
         <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout}/>}/>
         <Route path="/success" element={<SuccessPage />}/>
+        <Route path="/contact" element={<ContactPage />}/>
       </Routes>
       </main>
     </>

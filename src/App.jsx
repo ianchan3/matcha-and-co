@@ -4,6 +4,7 @@ import HomePage from "./HomePage/HomePage";
 import MenuPage from "./MenuPage/MenuPage";
 import SuccessPage from "./SuccessPage/SuccessPage";
 import ContactPage from "./ContactPage/ContactPage";
+const API_URL = import.meta.env.VITE_API_URL;
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
@@ -29,7 +30,7 @@ function App() {
   async function goToCheckout() {
   
     try {
-      const res = await fetch("http://localhost:4242/checkout", {
+      const res = await fetch(`${API_URL}/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart }),

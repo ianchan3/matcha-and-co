@@ -1,5 +1,6 @@
 import stripe from "../config/stripe.js";
 import CheckoutAttempt from "../model/CheckoutAttempt.js";
+import "dotenv/config";
 
 
 export async function create (req, res) {
@@ -26,8 +27,8 @@ export async function create (req, res) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
-      success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.CLIENT_URL}/menu`,
+      success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.FRONTEND_URL}/menu`,
     });
 
     await CheckoutAttempt.create({

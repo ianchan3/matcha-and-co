@@ -19,10 +19,10 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
   const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   const menuItems = [
-    {id: "flan", name: "flan", priceCents: 399},
-    {id: "vietnamesesoyrice", name: "vietnamesesoyrice", priceCents: 799},
-    {id: "bunbohue", name: "bunbohue", priceCents: 999},
-    {id: "mangostickyrice", name: "mangostickyrice", priceCents: 1199},
+    {id: "flan", name: "Flan", priceCents: 399},
+    {id: "vietnamesesoyrice", name: "Vietnamese Soy Rice", priceCents: 799},
+    {id: "bunbohue", name: "Bun Bo Hue", priceCents: 999},
+    {id: "mangostickyrice", name: "Mango Sticky Rice", priceCents: 1199},
   ]
 
   return (

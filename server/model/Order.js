@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const OrderItemSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },

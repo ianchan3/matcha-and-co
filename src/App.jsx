@@ -44,7 +44,7 @@ function App() {
         alert(data.error || "Checkout failed");
         return;
       }
-  
+  ``
       window.location.href = data.url;
     } catch (err) {
       clearTimeout(timeoutId);

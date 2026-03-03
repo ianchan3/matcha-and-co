@@ -2,12 +2,28 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import checkoutRoutes from './routes/checkout.js';
+import webhooksRoutes from "./routes/webhooks.js";
 import mongoose from "mongoose";
 
 dotenv.config();
 
 const app = express();
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"], methods: ["GET","POST"], allowedHeaders: ["Content-Type"] }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false,
+  })
+);
+
+app.use("/webhooks", webhooksRoutes);
 app.use(express.json());
 
 
@@ -16,8 +32,12 @@ app.use('/checkout', checkoutRoutes);
 await mongoose.connect(process.env.MONGODB_URI);
 console.log("Mongo connected");
 
-app.listen(4242, () => {
-  console.log("Server running on http://localhost:4242");
+const PORT = process.env.PORT || 4242;
+
+app.get("/health", (req, res) => res.json({ ok: true }));
+
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
 });
 
 

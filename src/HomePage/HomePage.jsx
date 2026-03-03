@@ -35,7 +35,6 @@ export default function HomePage() {
           <h1>
           Welcome to the Menu Page! Scroll to discover our delicious menu
           </h1>
-          <h1 id="mongmai">More about our beautiful chef: Mong Mai</h1>
         </div>
       </section>
     </main>

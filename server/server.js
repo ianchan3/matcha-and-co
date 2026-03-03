@@ -1,11 +1,10 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import "dotenv/config";
 import checkoutRoutes from './routes/checkout.js';
 import webhooksRoutes from "./routes/webhooks.js";
 import mongoose from "mongoose";
 
-dotenv.config();
 
 const app = express();
 const allowedOrigins = [

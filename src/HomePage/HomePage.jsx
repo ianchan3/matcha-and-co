@@ -25,16 +25,9 @@ export default function HomePage() {
   return (
     <main className="HomePage">
       <NavBar />
-      <section id="Welcome" className="Welcome">
-        <h1 id="greeting">
-          Flan Restaurant
-        </h1>
-      </section>
       <section id="Description">
         <div>
-          <h1>
-          Welcome to the Menu Page! Scroll to discover our delicious menu
-          </h1>
+          Hello
         </div>
       </section>
     </main>

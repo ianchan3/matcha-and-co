@@ -1,9 +1,4 @@
 body {
   height: 100vh;
-  background-color: black;
   margin: 0;
-}
-
-h1, p {
-  color: white;
 }

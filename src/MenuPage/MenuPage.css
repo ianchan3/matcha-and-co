@@ -1,38 +1,55 @@
-#MenuPageHeader {
+#MenuPageHeader > h1 {
   text-align: center;
 }
 
 #MenuItemsList {
   display: grid;
-  /* gap: 10px; */
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .MenuItem {
   text-align: center;
 }
 
-.MenuItem > h1 {
-  border: 2px solid yellow;
-  border-radius: 50px;
-  margin: 5px 5px 20px 5px;
-}
-
-.MenuItem > img {
-  text-align: center;
+#MenuItemsListContainer {
+  margin: 0 30% 0 30%;
+  border: 2px solid black;
   border-radius: 25px;
-  border: 2px solid yellow;
 }
 
-.MenuItem div select, .MenuItem div button {
+
+.MenuItemButton {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-radius: 25px;
   margin: 10px;
-  padding: 10px;
-  font-size: 15px;
-  border-radius: 15px;
-  border: 4px solid black;
+  padding: 25px;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
 }
 
-.MenuItem div button:hover, .MenuItem div select:hover {
-  background-color: yellow;
+img {
+  border-radius: 50%;
+  border: 5px solid rgb(169, 189, 70);
 }
+
+.MenuItemButton > h1 {
+  font-size: 15px;
+
+}
+
+.MenuItemButton:hover {
+  background-color: rgb(169, 189, 70);
+}
+
+
+.MenuItem > h1 {
+  color: rgb(169, 189, 70);
+  border-radius: 50px;
+  margin: 5px 5px 5px 5px;
+  font-size: 25px;
+}
+
+

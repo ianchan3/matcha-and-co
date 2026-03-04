@@ -28,15 +28,16 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
   return (
     <main className="MenuPage">
       <NavBar />
-      <div id="MenuPageHeader">
-        <h1>OUR BEAUTIFUL MENU!!</h1>
-      </div>
+      <div id="MenuItemsListContainer">
+        <h1>Select an Item</h1>
       <section id="MenuItemsList">
         <div className="MenuItem">
-          <h1>
-          FLAN
-          </h1>
-          <img src={flanImage} width='250px' height='200px' alt='Flan' />
+          <button className="MenuItemButton">   
+            <img src={flanImage} width='100px' height='75px' alt='Flan' />
+            <h1>
+            FLAN
+            </h1>
+          </button>
           <div>
             <select value={flanQty} onChange={(e) => setFlanQty(Number(e.target.value))}>
               <option value={1}>1</option>
@@ -48,10 +49,12 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
           </div>
         </div>
         <div className="MenuItem">
-          <h1>
-            Vietnamese SOY RICE 
-          </h1>
-          <img src={VietnameseSoyRice} width='250px' height='200px' alt='Vietnamese Soy Rice' />
+          <button className="MenuItemButton">
+            <img src={VietnameseSoyRice} width='100px' height='75px' alt='Vietnamese Soy Rice' />
+            <h1>
+              Vietnamese SOY RICE 
+            </h1>
+          </button>
           <div>
             <select value={vietnamesesoyriceQty} onChange={(e) => setVietnamesesoyriceQty(Number(e.target.value))}>
               <option value={1}>1</option>
@@ -63,10 +66,12 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
           </div>
         </div>
         <div className="MenuItem">
-          <h1>
-          BUN BO HUE
-          </h1>
-          <img src={BunBoHue} width='250px' height='200px'alt='Bun Bo Hue' />
+          <button className="MenuItemButton">
+            <img src={BunBoHue} width='100px' height='75px'alt='Bun Bo Hue' />
+            <h1>
+            BUN BO HUE
+            </h1>
+          </button>
           <div>
           <select value={bunbohueQty} onChange={(e) => setBunbohueQty(Number(e.target.value))}>
               <option value={1}>1</option>
@@ -78,10 +83,12 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
           </div>
         </div>
         <div className="MenuItem">
-          <h1>
-            MANGO STICKY RICE 
-          </h1>
-          <img src={MangoStickyRice} width='250px' height='200px' alt='Mango Sticky Rice' />
+          <button className="MenuItemButton">
+            <img src={MangoStickyRice} width='100px' height='75px' alt='Mango Sticky Rice' />
+            <h1>
+              MANGO STICKY RICE 
+            </h1>
+          </button>
           <div>
           <select value={mangostickyriceQty} onChange={(e) => setMangostickyriceQty(Number(e.target.value))}>
               <option value={1}>1</option>
@@ -100,6 +107,8 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
   <button disabled={cart.length === 0} onClick={goToCheckout}>
   Checkout
 </button>
+
+      </div>
     </main>
   )
 }

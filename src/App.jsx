@@ -62,6 +62,7 @@ function App() {
         <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout}/>}/>
         <Route path="/success" element={<SuccessPage />}/>
         <Route path="/contact" element={<ContactPage />}/>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       </main>
     </>

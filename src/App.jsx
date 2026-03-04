@@ -9,7 +9,22 @@ const API_URL = import.meta.env.VITE_API_URL;
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL || "";
+const isUAT = apiUrl.includes("uat");
+
 function App() {
+
+  {isUAT && (
+    <div style={{
+      background: "orange",
+      padding: "6px",
+      textAlign: "center",
+      fontWeight: "bold"
+    }}>
+      ⚠️ UAT Environment
+    </div>
+  )}
+
   const [cart, setCart] = useState([]);
 
   function addToCart(item, qty) {

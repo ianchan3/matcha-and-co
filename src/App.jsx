@@ -14,17 +14,6 @@ const isUAT = apiUrl.includes("uat");
 
 function App() {
 
-  {isUAT && (
-    <div style={{
-      background: "orange",
-      padding: "6px",
-      textAlign: "center",
-      fontWeight: "bold"
-    }}>
-      ⚠️ UAT Environment
-    </div>
-  )}
-
   const [cart, setCart] = useState([]);
 
   function addToCart(item, qty) {
@@ -72,6 +61,17 @@ function App() {
 
   return (
     <>
+
+{isUAT && (
+    <div style={{
+      background: "orange",
+      padding: "6px",
+      textAlign: "center",
+      fontWeight: "bold"
+    }}>
+      ⚠️ UAT Environment
+    </div>
+  )}
       <main className='App'>
       <Routes id="routes">
         <Route path="/" element={<HomePage/>}/>

@@ -5,14 +5,21 @@
 #MenuItemsList {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  /* border: 5px solid yellow; */
 }
 
 .MenuItem {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 #MenuItemsListContainer {
   margin: 0 30% 0 30%;
+  /* background-color: blue; */
   border: 2px solid black;
   border-radius: 25px;
 }
@@ -20,14 +27,32 @@
 
 .MenuItemButton {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 120px 1fr;
+  width: 100%;
+  min-height: 120px;
+  box-sizing: border-box;
+  gap: 12px;
   border-radius: 25px;
-  margin: 10px;
-  padding: 25px;
+  margin: 0;
+  padding: 10px;
   cursor: pointer;
   align-items: center;
+}
+
+.MenuItemText {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  place-items: center;
+}
+
+.MenuItemText h1 {
+  margin: 0;
+}
+
+.MenuItemText p {
+  font-size: 14px;
+  color: #555;
+  margin: 5px 0 0 0;
 }
 
 img {
@@ -37,7 +62,8 @@ img {
 
 .MenuItemButton > h1 {
   font-size: 15px;
-
+  margin: 0;
+  text-align: left;
 }
 
 .MenuItemButton:hover {

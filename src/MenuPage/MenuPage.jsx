@@ -76,9 +76,10 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
           <div className="MenuItem">
             <button className="MenuItemButton" onClick={() => openModal("flan")}>
               <img src={flanImage} width='100px' height='75px' alt='Flan' />
-              <h1>
-                FLAN
-              </h1>
+              <div className="MenuItemText">
+                <h1>FLAN</h1>
+                <p>${(menuItems[0].priceCents / 100).toFixed(2)}</p>
+              </div>
             </button>
             <div>
               <select value={flanQty} onChange={(e) => setFlanQty(Number(e.target.value))}>
@@ -91,11 +92,14 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
             </div>
           </div>
           <div className="MenuItem">
-            <button className="MenuItemButton">
+            <button className="MenuItemButton" onClick={() => openModal("vietnamesesoyrice")}>
               <img src={VietnameseSoyRice} width='100px' height='75px' alt='Vietnamese Soy Rice' />
+              <div className="MenuItemText">
               <h1>
                 Vietnamese SOY RICE
               </h1>
+              <p>${(menuItems[1].priceCents / 100).toFixed(2)}</p>
+              </div>
             </button>
             <div>
               <select value={vietnamesesoyriceQty} onChange={(e) => setVietnamesesoyriceQty(Number(e.target.value))}>
@@ -108,11 +112,14 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
             </div>
           </div>
           <div className="MenuItem">
-            <button className="MenuItemButton">
+            <button className="MenuItemButton" onClick={() => openModal("bunbohue")}>
               <img src={BunBoHue} width='100px' height='75px' alt='Bun Bo Hue' />
+              <div className="MenuItemText">
               <h1>
                 BUN BO HUE
               </h1>
+              <p>${(menuItems[2].priceCents / 100).toFixed(2)}</p>
+              </div>
             </button>
             <div>
               <select value={bunbohueQty} onChange={(e) => setBunbohueQty(Number(e.target.value))}>
@@ -125,11 +132,14 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
             </div>
           </div>
           <div className="MenuItem">
-            <button className="MenuItemButton">
+            <button className="MenuItemButton" onClick={() => openModal("mangostickyrice")}>
               <img src={MangoStickyRice} width='100px' height='75px' alt='Mango Sticky Rice' />
+              <div className="MenuItemText">
               <h1>
                 MANGO STICKY RICE
               </h1>
+              <p>${(menuItems[3].priceCents / 100).toFixed(2)}</p>
+              </div>
             </button>
             <div>
               <select value={mangostickyriceQty} onChange={(e) => setMangostickyriceQty(Number(e.target.value))}>
@@ -141,7 +151,7 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
               <button onClick={() => addToCart(menuItems[3], mangostickyriceQty)}>Add to Cart</button>
             </div>
           </div>
-        </section>`
+        </section>
         {/* TEMP DEBUG: remove later */}
         <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
           Cart items: {cartCount} | Total: ${(cartTotalCents / 100).toFixed(2)}

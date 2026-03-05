@@ -5,11 +5,10 @@ import HomePage from "./HomePage/HomePage";
 import MenuPage from "./MenuPage/MenuPage";
 import SuccessPage from "./SuccessPage/SuccessPage";
 import ContactPage from "./ContactPage/ContactPage";
-const API_URL = import.meta.env.VITE_API_URL;
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
-const apiUrl = import.meta.env.VITE_API_URL || "";
+const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4242";
 const isUAT = apiUrl.includes("uat");
 
 function App() {
@@ -35,7 +34,7 @@ function App() {
   async function goToCheckout() {
   
     try {
-      const res = await fetch(`${API_URL}/checkout`, {
+      const res = await fetch(`${apiUrl}/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart }),
@@ -53,7 +52,6 @@ function App() {
 
       window.location.href = data.url;
     } catch (err) {
-      clearTimeout(timeoutId);
       console.error("checkout error:", err);
       alert("Fetch failed or timed out (check console).");
     }

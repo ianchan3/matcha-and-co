@@ -8,13 +8,9 @@ import MangoStickyRice from "../assets/MangoStickyRice.jpg";
 import NavBar from "../NavBar/NavBar";
 
 export default function MenuPage({ cart, addToCart, goToCheckout }) {
-  const [flanQty, setFlanQty] = useState(1);
-  const [vietnamesesoyriceQty, setVietnamesesoyriceQty] = useState(1);
-  const [bunbohueQty, setBunbohueQty] = useState(1);
-  const [mangostickyriceQty, setMangostickyriceQty] = useState(1);
 
   const [activeItemId, setActiveItemId] = useState(null);
-  const [modalQty, setModalQty] = useState(1);
+  const [quantities, setQuantities] = useState({})
 
 
 
@@ -23,10 +19,10 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
   const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   const menuItems = [
-    { id: "flan", name: "Flan", priceCents: 399 },
-    { id: "vietnamesesoyrice", name: "Vietnamese Soy Rice", priceCents: 799 },
-    { id: "bunbohue", name: "Bun Bo Hue", priceCents: 999 },
-    { id: "mangostickyrice", name: "Mango Sticky Rice", priceCents: 1199 },
+    { id: "flan", name: "Flan", priceCents: 399, photo: flanImage },
+    { id: "vietnamesesoyrice", name: "Vietnamese Soy Rice", priceCents: 799, photo: VietnameseSoyRice },
+    { id: "bunbohue", name: "Bun Bo Hue", priceCents: 999, photo: BunBoHue },
+    { id: "mangostickyrice", name: "Mango Sticky Rice", priceCents: 1199, photo: MangoStickyRice },
   ]
 
   //making sure that activeItemId actually matches an item in the menuItems array
@@ -73,84 +69,36 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
           </div>
         )}
         <section id="MenuItemsList">
-          <div className="MenuItem">
-            <button className="MenuItemButton" onClick={() => openModal("flan")}>
-              <img src={flanImage} width='100px' height='75px' alt='Flan' />
-              <div className="MenuItemText">
-                <h1>FLAN</h1>
-                <p>${(menuItems[0].priceCents / 100).toFixed(2)}</p>
+
+          {menuItems.map((item) => (
+            <div className="MenuItem" key={item.id}>
+              <button className="MenuItemButton" onClick={() => openModal(item.id)}>
+                <img src={item.photo} width='100px' height='75px' alt={item.id} />
+                <div className="MenuItemText">
+                  <h1>{item.name.toUpperCase()}</h1>
+                  <p>${(item.priceCents / 100).toFixed(2)}</p>
+                </div>
+              </button>
+              <div>
+                <select value={quantities[item.id] || 1}
+                  onChange={(e) =>
+                    setQuantities({
+                      ...quantities,
+                      [item.id]: Number(e.target.value),
+                    }
+                    )
+                  }
+                >
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                </select>
+                <button onClick={() => addToCart(item, quantities[item.id] || 1)}>Add to Cart</button>
               </div>
-            </button>
-            <div>
-              <select value={flanQty} onChange={(e) => setFlanQty(Number(e.target.value))}>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-              </select>
-              <button onClick={() => addToCart(menuItems[0], flanQty)}>Add to Cart</button>
             </div>
-          </div>
-          <div className="MenuItem">
-            <button className="MenuItemButton" onClick={() => openModal("vietnamesesoyrice")}>
-              <img src={VietnameseSoyRice} width='100px' height='75px' alt='Vietnamese Soy Rice' />
-              <div className="MenuItemText">
-              <h1>
-                Vietnamese SOY RICE
-              </h1>
-              <p>${(menuItems[1].priceCents / 100).toFixed(2)}</p>
-              </div>
-            </button>
-            <div>
-              <select value={vietnamesesoyriceQty} onChange={(e) => setVietnamesesoyriceQty(Number(e.target.value))}>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-              </select>
-              <button onClick={() => addToCart(menuItems[1], vietnamesesoyriceQty)}>Add to Cart</button>
-            </div>
-          </div>
-          <div className="MenuItem">
-            <button className="MenuItemButton" onClick={() => openModal("bunbohue")}>
-              <img src={BunBoHue} width='100px' height='75px' alt='Bun Bo Hue' />
-              <div className="MenuItemText">
-              <h1>
-                BUN BO HUE
-              </h1>
-              <p>${(menuItems[2].priceCents / 100).toFixed(2)}</p>
-              </div>
-            </button>
-            <div>
-              <select value={bunbohueQty} onChange={(e) => setBunbohueQty(Number(e.target.value))}>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-              </select>
-              <button onClick={() => addToCart(menuItems[2], bunbohueQty)}>Add to Cart</button>
-            </div>
-          </div>
-          <div className="MenuItem">
-            <button className="MenuItemButton" onClick={() => openModal("mangostickyrice")}>
-              <img src={MangoStickyRice} width='100px' height='75px' alt='Mango Sticky Rice' />
-              <div className="MenuItemText">
-              <h1>
-                MANGO STICKY RICE
-              </h1>
-              <p>${(menuItems[3].priceCents / 100).toFixed(2)}</p>
-              </div>
-            </button>
-            <div>
-              <select value={mangostickyriceQty} onChange={(e) => setMangostickyriceQty(Number(e.target.value))}>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-              </select>
-              <button onClick={() => addToCart(menuItems[3], mangostickyriceQty)}>Add to Cart</button>
-            </div>
-          </div>
+
+          ))}
         </section>
         {/* TEMP DEBUG: remove later */}
         <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>

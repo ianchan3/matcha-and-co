@@ -31,6 +31,10 @@ function App() {
     });
   }
 
+
+  function removeFromCart(indexToRemove) {
+    setCart((prevCart) => prevCart.filter((_,index) => index !== indexToRemove));
+  }
   async function goToCheckout() {
   
     try {
@@ -73,7 +77,7 @@ function App() {
       <main className='App'>
       <Routes id="routes">
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout}/>}/>
+        <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart}/>}/>
         <Route path="/success" element={<SuccessPage />}/>
         <Route path="/contact" element={<ContactPage />}/>
         <Route path="*" element={<Navigate to="/" replace />} />

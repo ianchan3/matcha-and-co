@@ -7,11 +7,11 @@ import BunBoHue from "../assets/BunBoHue.jpg";
 import MangoStickyRice from "../assets/MangoStickyRice.jpg";
 import NavBar from "../NavBar/NavBar";
 
-export default function MenuPage({ cart, addToCart, goToCheckout }) {
+export default function MenuPage({ cart, addToCart, goToCheckout, removeFromCart }) {
 
   const [activeItemId, setActiveItemId] = useState(null);
   const [quantities, setQuantities] = useState({})
-
+  const [modalQty, setModalQty] = useState(1)
 
 
 
@@ -45,6 +45,8 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
   function increaseQty() {
     setModalQty((previousQty) => previousQty + 1);
   }
+
+
   return (
     <main className="MenuPage">
       <NavBar />
@@ -98,9 +100,23 @@ export default function MenuPage({ cart, addToCart, goToCheckout }) {
               </div>
             </div>
 
+
           ))}
         </section>
         {/* TEMP DEBUG: remove later */}
+        <h3>Cart</h3>
+
+        {cart.length === 0 ? (
+          <div>Your cart is empty</div>
+        ) : (
+          cart.map((item, index) => (
+            <div key={index}>
+              {item.name} — Qty: {item.qty} — $
+              {((item.priceCents * item.qty) / 100).toFixed(2)}
+              <button onClick={() => removeFromCart(index)}>Remove</button>
+            </div>
+          ))
+        )}
         <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
           Cart items: {cartCount} | Total: ${(cartTotalCents / 100).toFixed(2)}
         </div>

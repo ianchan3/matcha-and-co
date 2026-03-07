@@ -7,7 +7,9 @@ import BunBoHue from "../assets/BunBoHue.jpg";
 import MangoStickyRice from "../assets/MangoStickyRice.jpg";
 import NavBar from "../NavBar/NavBar";
 
-export default function MenuPage({ cart, addToCart, goToCheckout, removeFromCart }) {
+export default function MenuPage({ 
+  cart, addToCart, goToCheckout, removeFromCart, decreaseCartQty, increaseCartQty 
+}) {
 
   const [activeItemId, setActiveItemId] = useState(null);
   const [quantities, setQuantities] = useState({})
@@ -111,9 +113,10 @@ export default function MenuPage({ cart, addToCart, goToCheckout, removeFromCart
         ) : (
           cart.map((item, index) => (
             <div key={index}>
-              {item.name} — Qty: {item.qty} — $
-              {((item.priceCents * item.qty) / 100).toFixed(2)}
-              <button onClick={() => removeFromCart(index)}>Remove</button>
+              {item.name} &nbsp; | &nbsp; Qty: {item.qty} x ${(item.priceCents / 100).toFixed(2)} = &nbsp; Price: {((item.priceCents * item.qty) / 100).toFixed(2)}
+              &nbsp; <button onClick={() => decreaseCartQty(index)}>-</button>&nbsp; 
+              &nbsp; <button onClick={() => increaseCartQty(index)}>+</button>
+              &nbsp; <button onClick={() => removeFromCart(index)}>Remove</button>
             </div>
           ))
         )}

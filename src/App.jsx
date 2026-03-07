@@ -13,42 +13,60 @@ const isUAT = apiUrl.includes("uat");
 
 function App() {
 
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
   function addToCart(item, qty) {
     const qtyNum = Number(qty) || 1;
 
     //prev is the most up-to-date previous cart array
     setCart((prev) => {
-        const existingItem = prev.find((x) => x.id === item.id);
+      const existingItem = prev.find((x) => x.id === item.id);
 
-        if (existingItem) {
-          return prev.map((x) =>
-            x.id === item.id ? { ...x, qty: x.qty + qtyNum} : x
-          );
-        }
-        return [...prev, {...item, qty: qtyNum}];
+      if (existingItem) {
+        return prev.map((x) =>
+          x.id === item.id ? { ...x, qty: x.qty + qtyNum } : x
+        );
+      }
+      return [...prev, { ...item, qty: qtyNum }];
     });
   }
 
 
   function removeFromCart(indexToRemove) {
-    setCart((prevCart) => prevCart.filter((_,index) => index !== indexToRemove));
+    setCart((prevCart) => prevCart.filter((_, index) => index !== indexToRemove));
   }
+
+  function decreaseCartQty(indexToRemove) {
+    setCart((prevCart) => prevCart.map((item, index) =>
+      index === indexToRemove ? { ...item, qty: item.qty - 1 } : item
+    )
+    );
+  }
+
+  function increaseCartQty(indexToRemove) {
+    setCart((prevCart) => prevCart.map((item, index) =>
+      index === indexToRemove ? { ...item, qty: item.qty + 1 } : item
+    )
+    );
+  }
+
   async function goToCheckout() {
-  
+
     try {
       const res = await fetch(`${apiUrl}/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart }),
       });
-  
-  
+
+
       console.log("fetch returned", res.status);
       const data = await res.json();
       console.log("json parsed", data);
-  
+
       if (!res.ok) {
         alert(data.error || "Checkout failed");
         return;
@@ -64,24 +82,24 @@ function App() {
   return (
     <>
 
-{isUAT && (
-    <div style={{
-      background: "orange",
-      padding: "6px",
-      textAlign: "center",
-      fontWeight: "bold"
-    }}>
-      ⚠️ UAT Environment
-    </div>
-  )}
+      {isUAT && (
+        <div style={{
+          background: "orange",
+          padding: "6px",
+          textAlign: "center",
+          fontWeight: "bold"
+        }}>
+          ⚠️ UAT Environment
+        </div>
+      )}
       <main className='App'>
-      <Routes id="routes">
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart}/>}/>
-        <Route path="/success" element={<SuccessPage />}/>
-        <Route path="/contact" element={<ContactPage />}/>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+        <Routes id="routes">
+          <Route path="/" element={<HomePage />} />
+          <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty}/>} />
+          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
     </>
   )

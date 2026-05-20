@@ -67,7 +67,9 @@ function App() {
       const res = await fetch(`${apiUrl}/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cart }),
+        body: JSON.stringify({
+          cart, origin: window.location.origin,
+        }),
       });
 
 
@@ -103,7 +105,7 @@ function App() {
       <main className='App'>
         <Routes id="routes">
           <Route path="/" element={<HomePage />} />
-          <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart}/>} />
+          <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

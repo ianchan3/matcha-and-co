@@ -5,7 +5,9 @@ import "dotenv/config";
 
 export async function create (req, res) {
   try {
-    const { cart } = req.body;
+    const { cart, origin } = req.body;
+
+    const frontendUrl = origin || process.env.FRONTEND_URL;
 
     // Variable called cart is created with the values from the request (name, qty, priceCents)
 
@@ -27,8 +29,8 @@ export async function create (req, res) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
-      success_url: `${process.env.FRONTEND_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.FRONTEND_URL}/menu`,
+      success_url: `${frontendUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${frontendUrl}/menu`,
     });
 
     await CheckoutAttempt.create({

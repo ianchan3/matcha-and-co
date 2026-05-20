@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React from "react";
 import { Navigate } from "react-router-dom"
 import HomePage from "./HomePage/HomePage";
@@ -53,6 +53,14 @@ function App() {
     );
   }
 
+  function removeWholeCart() {
+    setCart([]);
+  }
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   async function goToCheckout() {
 
     try {
@@ -95,7 +103,7 @@ function App() {
       <main className='App'>
         <Routes id="routes">
           <Route path="/" element={<HomePage />} />
-          <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty}/>} />
+          <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart}/>} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

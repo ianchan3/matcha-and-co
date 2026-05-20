@@ -1,10 +1,10 @@
-#MenuPageHeader > h1 {
+#MenuPageHeader>h1 {
   text-align: center;
 }
 
 #MenuItemsList {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 18px;
   align-items: stretch;
   /* border: 5px solid yellow; */
@@ -18,10 +18,9 @@
 }
 
 #MenuItemsListContainer {
-  margin: 0 30% 0 30%;
-  /* background-color: blue; */
-  border: 2px solid black;
-  border-radius: 25px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
 
@@ -37,6 +36,13 @@
   padding: 10px;
   cursor: pointer;
   align-items: center;
+    transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.06);
 }
 
 .MenuItemText {
@@ -45,8 +51,9 @@
   justify-content: center;
 }
 
-.MenuItemText h1 {
+.MenuItemText h2 {
   margin: 0;
+  font-size: 20px;
 }
 
 .MenuItemText p {
@@ -55,55 +62,143 @@
   margin: 5px 0 0 0;
 }
 
-img {
-  border-radius: 50%;
-  border: 5px solid rgb(169, 189, 70);
+.MenuItemButton img {
+  border-radius: 18px;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border: 4px solid rgb(169, 189, 70);
 }
 
-.MenuItemButton > h1 {
+.MenuItemButton>h1 {
   font-size: 15px;
   margin: 0;
   text-align: left;
 }
 
 .MenuItemButton:hover {
-  background-color: rgb(169, 189, 70);
+    transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.12);
+
+  background-color:
+    rgb(248, 250, 235);
+
 }
 
 
-.MenuItem > h1 {
+.MenuItem>h1 {
   color: rgb(169, 189, 70);
   border-radius: 50px;
   margin: 5px 5px 5px 5px;
   font-size: 25px;
 }
 
- .ModalOverlay {
+.ModalOverlay {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   padding: 18px;
   z-index: 999;
- }
+}
 
 
 .Modal {
   background: white;
   width: min(420px, 100%);
-  border-radius: 18px;
+  border-radius: 20px;
   position: relative;
-  padding: 18px;
+  padding: 24px;
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.2);
+  animation: modalFade 0.18s ease;
 }
 
 .ModalClose {
   position: absolute;
   right: 10px;
   top: 10px;
-  border: none;
+  border: red solid 2px;
+  color: red;
   background: transparent;
   font-size: 18px;
   cursor: pointer;
-} 
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.AddToCartButton {
+  width: 100%;
+  margin-top: 18px;
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 14px;
+  background: rgb(169, 189, 70);
+  color: black;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.AddToCartButton:hover {
+  opacity: 0.75;
+}
+
+.ModalImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 4px solid rgb(169, 189, 70);
+  margin-bottom: 16px;
+}
+
+.QtyRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.QtyRow button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.QtyRow button {
+    background: rgb(169, 189, 70);
+    color: black;
+    border: black 2px solid;
+}
+
+.QtyRow button:hover {
+  opacity: 0.75;
+}
+
+.QtyValue {
+  min-width: 32px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}

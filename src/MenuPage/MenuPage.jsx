@@ -7,12 +7,12 @@ import BunBoHue from "../assets/BunBoHue.jpg";
 import MangoStickyRice from "../assets/MangoStickyRice.jpg";
 import NavBar from "../NavBar/NavBar";
 
-export default function MenuPage({ 
-  cart, addToCart, goToCheckout, removeFromCart, decreaseCartQty, increaseCartQty 
+export default function MenuPage({
+  cart, addToCart, goToCheckout, removeFromCart, decreaseCartQty, increaseCartQty,
+  removeWholeCart
 }) {
 
   const [activeItemId, setActiveItemId] = useState(null);
-  const [quantities, setQuantities] = useState({})
   const [modalQty, setModalQty] = useState(1)
 
 
@@ -60,8 +60,12 @@ export default function MenuPage({
               <button className="ModalClose" onClick={closeModal} aria-label="Close">
                 ✕
               </button>
-              <h2>Modal is open</h2>
-              <p>activeItemId: <b>{activeItem.id}</b></p>
+              <img
+                src={activeItem.photo}
+                alt={activeItem.name}
+                className="ModalImage"
+              />
+
               <h2>{activeItem.name}</h2>
               <p>${(activeItem.priceCents / 100).toFixed(2)}</p>
               <div className="QtyRow">
@@ -69,6 +73,15 @@ export default function MenuPage({
                 <div className="QtyValue">{modalQty} Qty - {activeItem.name}</div>
                 <button onClick={increaseQty}>+</button>
               </div>
+              <button
+                className="AddToCartButton"
+                onClick={() => {
+                  addToCart(activeItem, modalQty);
+                  closeModal();
+                }}
+              >
+                Add {modalQty} to Cart
+              </button>
             </div>
           </div>
         )}
@@ -79,27 +92,11 @@ export default function MenuPage({
               <button className="MenuItemButton" onClick={() => openModal(item.id)}>
                 <img src={item.photo} width='100px' height='75px' alt={item.id} />
                 <div className="MenuItemText">
-                  <h1>{item.name.toUpperCase()}</h1>
+                  <h2>{item.name}</h2>
                   <p>${(item.priceCents / 100).toFixed(2)}</p>
                 </div>
               </button>
-              <div>
-                <select value={quantities[item.id] || 1}
-                  onChange={(e) =>
-                    setQuantities({
-                      ...quantities,
-                      [item.id]: Number(e.target.value),
-                    }
-                    )
-                  }
-                >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                  <option value={4}>4</option>
-                </select>
-                <button onClick={() => addToCart(item, quantities[item.id] || 1)}>Add to Cart</button>
-              </div>
+
             </div>
 
 
@@ -114,7 +111,7 @@ export default function MenuPage({
           cart.map((item, index) => (
             <div key={index}>
               {item.name} &nbsp; | &nbsp; Qty: {item.qty} x ${(item.priceCents / 100).toFixed(2)} = &nbsp; Price: {((item.priceCents * item.qty) / 100).toFixed(2)}
-              &nbsp; <button onClick={() => decreaseCartQty(index)}>-</button>&nbsp; 
+              &nbsp; <button onClick={() => decreaseCartQty(index)}>-</button>&nbsp;
               &nbsp; <button onClick={() => increaseCartQty(index)}>+</button>
               &nbsp; <button onClick={() => removeFromCart(index)}>Remove</button>
             </div>
@@ -122,6 +119,7 @@ export default function MenuPage({
         )}
         <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
           Cart items: {cartCount} | Total: ${(cartTotalCents / 100).toFixed(2)}
+          &nbsp;<button onClick={removeWholeCart}>Remove All</button>
         </div>
         <button disabled={cart.length === 0} onClick={goToCheckout}>
           Checkout

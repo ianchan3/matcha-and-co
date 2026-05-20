@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import React from "react";
 import { Navigate } from "react-router-dom"
-import HomePage from "./HomePage/HomePage";
 import MenuPage from "./MenuPage/MenuPage";
 import SuccessPage from "./SuccessPage/SuccessPage";
 import ContactPage from "./ContactPage/ContactPage";

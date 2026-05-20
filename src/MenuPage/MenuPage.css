@@ -66,7 +66,7 @@
   border-radius: 18px;
   width: 110px;
   height: 110px;
-  object-fit: cover;
+  object-fit: fill;
   border: 4px solid rgb(169, 189, 70);
 }
 

@@ -1,10 +1,12 @@
 import "./MenuPage.css";
 import { useState } from "react";
 import React from "react";
-import flanImage from "../assets/Flan.jpg";
-import VietnameseSoyRice from "../assets/Vietnamese-Soy-Rice.jpg";
-import BunBoHue from "../assets/BunBoHue.jpg";
-import MangoStickyRice from "../assets/MangoStickyRice.jpg";
+import MatchaLatte from "../assets/Matcha_Latte.webp";
+import BlueberryMatcha from "../assets/BlueberryMatcha.jpg";
+import StrawberryMatcha from "../assets/StrawberryMatchaLatte.jpg";
+import BananaMatcha from "../assets/BananaMatcha.jpeg";
+import MangoMatcha from "../assets/MangoMatcha.jpg";
+import CoconutMatcha from "../assets/CoconutMatcha.jpg";
 import NavBar from "../NavBar/NavBar";
 
 export default function MenuPage({
@@ -21,10 +23,12 @@ export default function MenuPage({
   const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   const menuItems = [
-    { id: "flan", name: "Flan", priceCents: 399, photo: flanImage },
-    { id: "vietnamesesoyrice", name: "Vietnamese Soy Rice", priceCents: 799, photo: VietnameseSoyRice },
-    { id: "bunbohue", name: "Bun Bo Hue", priceCents: 999, photo: BunBoHue },
-    { id: "mangostickyrice", name: "Mango Sticky Rice", priceCents: 1199, photo: MangoStickyRice },
+    { id: "matcha", name: "Matcha Latte", priceCents: 799, photo: MatchaLatte },
+    { id: "blueberrymatcha", name: "Blueberry Matcha", priceCents: 999, photo: BlueberryMatcha },
+    { id: "strawberrymatcha", name: "Strawberry Matcha", priceCents: 999, photo: StrawberryMatcha },
+    { id: "bananamatcha", name: "Banana Matcha", priceCents: 999, photo: BananaMatcha },
+    { id: "mangomatcha", name: "Mango Matcha", priceCents: 999, photo: MangoMatcha },
+    { id: "coconutmatcha", name: "Coconut Matcha", priceCents: 999, photo: CoconutMatcha },
   ]
 
   //making sure that activeItemId actually matches an item in the menuItems array

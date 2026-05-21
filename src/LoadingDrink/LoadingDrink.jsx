@@ -1,6 +1,17 @@
 import "./LoadingDrink.css";
+import { useState, useEffect } from "react";
 
 export default function LoadingDrink() {
+
+  const [showSlowMessage, setShowSlowMessage] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() =>
+    setShowSlowMessage(true), 6000);
+    return () => clearTimeout(timer)
+  }, [])
+
+
   return (
     <div className="loading-overlay">
       <div className="loading-card">
@@ -67,6 +78,12 @@ export default function LoadingDrink() {
           <span />
           <span />
         </div>
+
+        {showSlowMessage && (
+          <p className="slow-message">
+            This is taking longer than usual — our server may be waking up. Hang tight!
+          </p>
+        )}
       </div>
     </div>
   );

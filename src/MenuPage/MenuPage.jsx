@@ -16,7 +16,8 @@ export default function MenuPage({
 }) {
 
   const [activeItemId, setActiveItemId] = useState(null);
-  const [modalQty, setModalQty] = useState(1)
+  const [modalQty, setModalQty] = useState(1);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
 
 
@@ -107,30 +108,76 @@ export default function MenuPage({
             </div>
           ))}
         </section>
-        {/* TEMP DEBUG: remove later */}
-        <div id="CartContainer">
+ 
+        <button className="CartToggleBtn" onClick={() => setIsCartOpen(true)}>
+          🛒 Cart
+          {cartCount > 0 && <span className="CartBadge">{cartCount}</span>}
+        </button>
 
-          <h3>Cart</h3>
 
-          {cart.length === 0 ? (
-            <div>Your cart is empty</div>
-          ) : (
-            cart.map((item, index) => (
-              <div key={index}>
-                {item.name} &nbsp; | &nbsp; Qty: {item.qty} x ${(item.priceCents / 100).toFixed(2)} = &nbsp; Price: {((item.priceCents * item.qty) / 100).toFixed(2)}
-                &nbsp; <button onClick={() => decreaseCartQty(index)}>-</button>&nbsp;
-                &nbsp; <button onClick={() => increaseCartQty(index)}>+</button>
-                &nbsp; <button onClick={() => removeFromCart(index)}>Remove</button>
-              </div>
-            ))
-          )}
-          <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
-            Total Qty: {cartCount} | Total Price: ${(cartTotalCents / 100).toFixed(2)}
-            &nbsp;<button onClick={removeWholeCart}>Remove All</button>
+        {isCartOpen && (
+          <div className="CartDrawerOverlay" onClick={() => setIsCartOpen(false)} />
+        )}
+
+   
+        <div className={`CartDrawer ${isCartOpen ? 'CartDrawerOpen' : ''}`}>
+          <div className="CartDrawerHeader">
+            <h3>Your Cart</h3>
+            <button className="CartDrawerClose" onClick={() => setIsCartOpen(false)}>✕</button>
           </div>
-          <button disabled={cart.length === 0} onClick={goToCheckout}>
-            Checkout
-          </button>
+
+          <div className="CartDrawerItems">
+            {cart.length === 0 ? (
+              <p className="CartEmpty">Your cart is empty</p>
+            ) : (
+              cart.map((item, index) => (
+                <div className="CartRow" key={index}>
+                  <span className="CartItemName">{item.name}</span>
+                  <div className="CartQtyControls">
+                    <button
+                      className="CartQtyBtn"
+                      onClick={() => decreaseCartQty(index)}
+                      disabled={item.qty <= 1}
+                      aria-label={`Decrease quantity of ${item.name}`}
+                    >−</button>
+                    <span className="CartQtyNum">{item.qty}</span>
+                    <button
+                      className="CartQtyBtn"
+                      onClick={() => increaseCartQty(index)}
+                      aria-label={`Increase quantity of ${item.name}`}
+                    >+</button>
+                  </div>
+                  <span className="CartItemPrice">
+                    ${((item.priceCents * item.qty) / 100).toFixed(2)}
+                  </span>
+                  <button
+                    className="CartRemoveBtn"
+                    onClick={() => removeFromCart(index)}
+                    aria-label={`Remove ${item.name}`}
+                  >✕</button>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="CartDrawerFooter">
+            <div className="CartTotal">
+              <span>Total ({cartCount} item{cartCount !== 1 ? 's' : ''})</span>
+              <span className="CartTotalPrice">${(cartTotalCents / 100).toFixed(2)}</span>
+            </div>
+            <button
+              className="CheckoutBtn"
+              disabled={cart.length === 0}
+              onClick={goToCheckout}
+            >
+              Checkout
+            </button>
+            {cart.length > 0 && (
+              <button className="CartClearBtn" onClick={removeWholeCart}>
+                Clear cart
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </main>

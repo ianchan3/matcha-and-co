@@ -28,3 +28,13 @@ nav > li {
   font-size: 30px;
   text-align: center;
 }
+
+@media (max-width: 600px) {
+  .NavBar {
+    padding: 16px 12px;
+  }
+
+  #matcha {
+    font-size: 22px;
+  }
+}

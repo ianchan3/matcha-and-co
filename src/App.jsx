@@ -98,6 +98,7 @@ function App() {
         <div style={{
           background: "orange",
           padding: "6px",
+          margin: "0 30% 0 30%",
           textAlign: "center",
           fontWeight: "bold"
         }}>
@@ -108,7 +109,7 @@ function App() {
         <Routes id="routes">
           {/* <Route path="/" element={<HomePage />} /> */}
           <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} isCheckingOut={isCheckingOut} />} />
-          <Route path="/success" element={<SuccessPage />} />
+          <Route path="/success" element={<SuccessPage removeWholeCart={removeWholeCart}/>} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<Navigate to="/menu" replace />} />
         </Routes>

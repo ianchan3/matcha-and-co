@@ -1,9 +1,10 @@
 import stripe from "../config/stripe.js";
+import Order from "../model/Order.js";
 import CheckoutAttempt from "../model/CheckoutAttempt.js";
 import "dotenv/config";
 
 
-export async function create (req, res) {
+export async function create(req, res) {
   try {
     const { cart, origin } = req.body;
 
@@ -45,3 +46,28 @@ export async function create (req, res) {
     res.status(500).json({ error: "Failed to create checkout session" });
   }
 };
+
+export async function getSession(req, res) {
+  try {
+    const { sessionId } = req.params;
+    const attempt = await CheckoutAttempt.findOne({
+      stripeSessionId: sessionId
+    });
+    if (!attempt) return res.status(404).json({ error: "Session Not Found" });
+    const order = await Order.findOne({ stripeSessionId: sessionId });
+    const items = order ? order.items : attempt.cart
+    const amountTotalCents =
+      order ? order.amountTotalCents
+        :
+        attempt.cart.reduce((sum, item) => sum + item.priceCents * item.qty, 0);
+    return res.json({
+      items,
+      amountTotalCents,
+      status: order ? order.status : attempt.status,
+      orderRef: sessionId.slice(-8),
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch session" });
+  }
+}

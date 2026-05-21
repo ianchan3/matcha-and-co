@@ -1,4 +1,121 @@
-.MenuSelector {
-  color: red;
-  font-size: 50px;
+.SuccessPage {
+  min-height: 100vh;
+  background: #f9faf4;
+}
+
+.SuccessCard {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 32px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.SuccessTitle {
+  font-size: 24px;
+  margin: 0;
+  color: #222;
+  text-align: center;
+}
+
+.SuccessSubtitle {
+  text-align: center;
+  color: #555;
+  margin: 0;
+}
+
+.SuccessRef {
+  text-align: center;
+  color: #555;
+  font-size: 14px;
+  margin: 0;
+}
+
+.SuccessItemsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+
+.SuccessItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.SuccessItem:last-child { border-bottom: none; }
+
+.SuccessItemName { color: #333; }
+.SuccessItemPrice { font-weight: 600; color: #222; }
+
+.SuccessTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 8px 0;
+  border-top: 2px solid rgb(169, 189, 70);
+}
+
+.SuccessBackBtn {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  background: rgb(169, 189, 70);
+  color: #222;
+  border: 2px solid #222;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.SuccessBackBtn:hover { opacity: 0.85; }
+
+.SuccessSpinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 24px auto;
+  border: 4px solid #e8efd0;
+  border-top-color: rgb(169, 189, 70);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.SuccessLoadingText {
+  text-align: center;
+  color: #555;
+  font-size: 15px;
+  margin: 0;
+}
+
+.SuccessError {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  margin: 0;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .SuccessCard {
+    margin: 20px 16px;
+    padding: 24px 20px;
+  }
 }

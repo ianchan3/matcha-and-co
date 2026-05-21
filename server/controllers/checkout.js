@@ -64,7 +64,7 @@ export async function getSession(req, res) {
       items,
       amountTotalCents,
       status: order ? order.status : attempt.status,
-      orderRef: sessionId.slice(-8),
+      orderRef: order.paymentIntentId.slice(-8),
     });
   } catch (err) {
     console.error(err);

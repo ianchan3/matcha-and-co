@@ -64,17 +64,19 @@ export default function MenuPage({
               <button className="ModalClose" onClick={closeModal} aria-label="Close">
                 ✕
               </button>
-              <img
-                src={activeItem.photo}
-                alt={activeItem.name}
-                className="ModalImage"
-              />
+              <div id="menuInfo">
+                <img
+                  src={activeItem.photo}
+                  alt={activeItem.name}
+                  className="ModalImage"
+                />
 
-              <h2>{activeItem.name}</h2>
-              <p>${(activeItem.priceCents / 100).toFixed(2)}</p>
+                <h2>{activeItem.name}</h2>
+                <p>${(activeItem.priceCents / 100).toFixed(2)}</p>
+              </div>
               <div className="QtyRow">
                 <button onClick={decreaseQty}>-</button>
-                <div className="QtyValue">{modalQty} Qty - {activeItem.name}</div>
+                <div className="QtyValue">{modalQty}</div>
                 <button onClick={increaseQty}>+</button>
               </div>
               <button
@@ -100,35 +102,34 @@ export default function MenuPage({
                   <p>${(item.priceCents / 100).toFixed(2)}</p>
                 </div>
               </button>
-
             </div>
-
-
           ))}
         </section>
         {/* TEMP DEBUG: remove later */}
-        <h3>Cart</h3>
+        <div id="CartContainer">
 
-        {cart.length === 0 ? (
-          <div>Your cart is empty</div>
-        ) : (
-          cart.map((item, index) => (
-            <div key={index}>
-              {item.name} &nbsp; | &nbsp; Qty: {item.qty} x ${(item.priceCents / 100).toFixed(2)} = &nbsp; Price: {((item.priceCents * item.qty) / 100).toFixed(2)}
-              &nbsp; <button onClick={() => decreaseCartQty(index)}>-</button>&nbsp;
-              &nbsp; <button onClick={() => increaseCartQty(index)}>+</button>
-              &nbsp; <button onClick={() => removeFromCart(index)}>Remove</button>
-            </div>
-          ))
-        )}
-        <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
-          Cart items: {cartCount} | Total: ${(cartTotalCents / 100).toFixed(2)}
-          &nbsp;<button onClick={removeWholeCart}>Remove All</button>
+          <h3>Cart</h3>
+
+          {cart.length === 0 ? (
+            <div>Your cart is empty</div>
+          ) : (
+            cart.map((item, index) => (
+              <div key={index}>
+                {item.name} &nbsp; | &nbsp; Qty: {item.qty} x ${(item.priceCents / 100).toFixed(2)} = &nbsp; Price: {((item.priceCents * item.qty) / 100).toFixed(2)}
+                &nbsp; <button onClick={() => decreaseCartQty(index)}>-</button>&nbsp;
+                &nbsp; <button onClick={() => increaseCartQty(index)}>+</button>
+                &nbsp; <button onClick={() => removeFromCart(index)}>Remove</button>
+              </div>
+            ))
+          )}
+          <div style={{ padding: 12, background: "#f5f5f5", marginBottom: 12 }}>
+            Total Qty: {cartCount} | Total Price: ${(cartTotalCents / 100).toFixed(2)}
+            &nbsp;<button onClick={removeWholeCart}>Remove All</button>
+          </div>
+          <button disabled={cart.length === 0} onClick={goToCheckout}>
+            Checkout
+          </button>
         </div>
-        <button disabled={cart.length === 0} onClick={goToCheckout}>
-          Checkout
-        </button>
-
       </div>
     </main>
   )

@@ -1,4 +1,4 @@
-#MenuPageHeader>h1 {
+#MenuPageHeader > h1 {
   text-align: center;
 }
 
@@ -20,9 +20,13 @@
 #MenuItemsListContainer {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 0 24px 24px 24px;
 }
 
+#MenuItemsListContainer > h1{
+  text-align: center;
+  margin-top: 0;
+}
 
 .MenuItemButton {
   display: grid;
@@ -160,12 +164,28 @@
 }
 
 .ModalImage {
-  width: 100%;
+  width: 220px;
   height: 220px;
   object-fit: cover;
   border-radius: 16px;
   border: 4px solid rgb(169, 189, 70);
-  margin-bottom: 16px;
+    box-shadow:
+    0 6px 18px rgba(0,0,0,0.15);
+}
+
+#menuInfo {
+  display: grid;
+  place-items: center;
+}
+
+#menuInfo p {
+  margin: 0;
+  padding: 0;
+}
+
+#menuInfo h2 {
+  margin: 3px;
+  padding: 3px;
 }
 
 .QtyRow {
@@ -201,4 +221,15 @@
   text-align: center;
   font-size: 18px;
   font-weight: 600;
+}
+
+#CartContainer {
+  margin-top: 50px;
+  text-align: center;
+  border: 1px solid lightgray;
+  border-radius: 25px;
+}
+
+#CartContainer > div {
+  margin: 10px 0;
 }

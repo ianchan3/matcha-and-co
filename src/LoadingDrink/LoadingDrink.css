@@ -1,0 +1,152 @@
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+.loading-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+
+/* ── SVG parts ── */
+
+.head {
+  fill: #f5c9a0;
+  stroke: #c9956e;
+  stroke-width: 1.5;
+}
+
+.eye {
+  fill: #3b2a1a;
+}
+
+.nose {
+  fill: none;
+  stroke: #c9956e;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.mouth {
+  fill: none;
+  stroke: #b0695a;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.hair {
+  fill: none;
+  stroke: #4a2e12;
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.limb {
+  fill: none;
+  stroke: #4a2e12;
+  stroke-linecap: round;
+}
+
+.body  { stroke-width: 5; }
+.arm   { stroke-width: 4; }
+.leg   { stroke-width: 5; }
+.foot  { stroke-width: 4; }
+
+.cup-body {
+  fill: #a8d5a2;
+  stroke: #6aaa64;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.cup-rim {
+  fill: #6aaa64;
+}
+
+.matcha-surface {
+  fill: #7ec87a;
+  opacity: 0.7;
+}
+
+.cup-handle {
+  fill: none;
+  stroke: #6aaa64;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+/* ── Steam ── */
+
+.steam {
+  fill: none;
+  stroke: #b8ddb5;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0;
+  animation: steam-rise 2s ease-in-out infinite;
+}
+
+.steam-1 { animation-delay: 0s; }
+.steam-2 { animation-delay: 0.5s; }
+.steam-3 { animation-delay: 1s; }
+
+@keyframes steam-rise {
+  0%   { opacity: 0;   transform: translateY(0px); }
+  30%  { opacity: 0.9; }
+  100% { opacity: 0;   transform: translateY(-10px); }
+}
+
+/* ── Sipping bob ── */
+
+.drinker {
+  animation: sip-bob 1.8s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes sip-bob {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25%       { transform: translateY(-3px) rotate(1deg); }
+  75%       { transform: translateY(1px) rotate(-0.5deg); }
+}
+
+/* ── Loading dots ── */
+
+.loading-text {
+  font-size: 1rem;
+  color: #4a3728;
+  font-weight: 600;
+  margin: 0;
+}
+
+.loading-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.loading-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7ec87a;
+  animation: dot-bounce 1.2s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+  40%            { transform: scale(1.2); opacity: 1; }
+}

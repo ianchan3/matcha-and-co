@@ -60,8 +60,10 @@ function App() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  async function goToCheckout() {
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
+  async function goToCheckout() {
+    setIsCheckingOut(true);
     try {
       const res = await fetch(`${apiUrl}/checkout`, {
         method: "POST",
@@ -71,13 +73,13 @@ function App() {
         }),
       });
 
-
       console.log("fetch returned", res.status);
       const data = await res.json();
       console.log("json parsed", data);
 
       if (!res.ok) {
         alert(data.error || "Checkout failed");
+        setIsCheckingOut(false);
         return;
       }
 
@@ -85,6 +87,7 @@ function App() {
     } catch (err) {
       console.error("checkout error:", err);
       alert("Fetch failed or timed out (check console).");
+      setIsCheckingOut(false);
     }
   }
 
@@ -104,7 +107,7 @@ function App() {
       <main className='App'>
         <Routes id="routes">
           {/* <Route path="/" element={<HomePage />} /> */}
-          <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} />} />
+          <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} isCheckingOut={isCheckingOut} />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<Navigate to="/menu" replace />} />

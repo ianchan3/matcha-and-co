@@ -8,10 +8,11 @@ import BananaMatcha from "../assets/BananaMatcha.jpeg";
 import MangoMatcha from "../assets/MangoMatcha.jpg";
 import CoconutMatcha from "../assets/CoconutMatcha.jpg";
 import NavBar from "../NavBar/NavBar";
+import LoadingDrink from "../LoadingDrink/LoadingDrink";
 
 export default function MenuPage({
   cart, addToCart, goToCheckout, removeFromCart, decreaseCartQty, increaseCartQty,
-  removeWholeCart
+  removeWholeCart, isCheckingOut
 }) {
 
   const [activeItemId, setActiveItemId] = useState(null);
@@ -55,6 +56,7 @@ export default function MenuPage({
 
   return (
     <main className="MenuPage">
+      {isCheckingOut && <LoadingDrink />}
       <NavBar />
       <div id="MenuItemsListContainer">
         <h1>Select an Item</h1>

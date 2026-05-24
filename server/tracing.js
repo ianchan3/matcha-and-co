@@ -14,8 +14,6 @@ const { PeriodicExportingMetricReader } = metricsPkg;
 
 // Extract "Basic BASE64STRING" from "Authorization=Basic BASE64STRING"
 const authHeader = (process.env.OTEL_EXPORTER_OTLP_HEADERS || '').replace('Authorization=', '');
-console.log('Auth header prefix:', authHeader.substring(0, 15));
-console.log('Endpoint:', process.env.OTEL_EXPORTER_OTLP_ENDPOINT);
 
 const sdk = new NodeSDK({
   // PeriodicExportingMetricReader gathers all data every 30s and hands it to OTLPMetricExporter

@@ -22,8 +22,8 @@ const sdk = new NodeSDK({
       url: `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/metrics`,
       headers: {
         Authorization: authHeader,
-        temporalityPreference: AggregationTemporality.DELTA,
       },
+      temporalityPreference: AggregationTemporality.DELTA,
     }),
     exportIntervalMillis: 30_000,
   }),

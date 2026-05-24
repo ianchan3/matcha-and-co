@@ -55,6 +55,3 @@ app.get("/health", (req, res) => res.json({ ok: true }));
 app.listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
-
-
-

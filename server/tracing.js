@@ -10,7 +10,7 @@ import exporterPkg from '@opentelemetry/exporter-metrics-otlp-http';
 const { OTLPMetricExporter } = exporterPkg;
 
 import metricsPkg from '@opentelemetry/sdk-metrics';
-const { PeriodicExportingMetricReader } = metricsPkg;
+const { PeriodicExportingMetricReader, AggregationTemporality } = metricsPkg;
 
 // Extract "Basic BASE64STRING" from "Authorization=Basic BASE64STRING"
 const authHeader = (process.env.OTEL_EXPORTER_OTLP_HEADERS || '').replace('Authorization=', '');
@@ -22,6 +22,7 @@ const sdk = new NodeSDK({
       url: `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/metrics`,
       headers: {
         Authorization: authHeader,
+        temporalityPreference: AggregationTemporality.DELTA,
       },
     }),
     exportIntervalMillis: 30_000,

@@ -6,7 +6,6 @@ import { checkoutAttempts, checkoutSuccesses, checkoutFailures } from "../metric
 
 
 export async function create(req, res) {
-  console.log('🛒 Checkout hit');
     checkoutAttempts.add(1);
   try {
     const { cart, origin } = req.body;
@@ -69,7 +68,7 @@ export async function getSession(req, res) {
       items,
       amountTotalCents,
       status: order ? order.status : attempt.status,
-      orderRef: order.paymentIntentId.slice(-8),
+      orderRef: order ? order.paymentIntentId.slice(-8) : sessionId.slice(-8),
     });
   } catch (err) {
     console.error(err);

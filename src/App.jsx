@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom"
 import MenuPage from "./MenuPage/MenuPage";
 import SuccessPage from "./SuccessPage/SuccessPage";
 import ContactPage from "./ContactPage/ContactPage";
+import { Toaster, toast} from 'sonner'
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
@@ -31,11 +32,14 @@ function App() {
       }
       return [...prev, { ...item, qty: qtyNum }];
     });
+    toast.success(`Added ${item.name} to cart`);
   }
 
 
   function removeFromCart(indexToRemove) {
+    const itemName = cart[indexToRemove]?.name;
     setCart((prevCart) => prevCart.filter((_, index) => index !== indexToRemove));
+    if (itemName) toast(`Removed ${itemName}`);
   }
 
   function decreaseCartQty(indexToRemove) {
@@ -54,6 +58,7 @@ function App() {
 
   function removeWholeCart() {
     setCart([]);
+    toast('Cart cleared');
   }
 
   useEffect(() => {
@@ -78,7 +83,7 @@ function App() {
       console.log("json parsed", data);
 
       if (!res.ok) {
-        alert(data.error || "Checkout failed");
+        toast.error(data.error || 'Checkout failed');
         setIsCheckingOut(false);
         return;
       }
@@ -86,7 +91,7 @@ function App() {
       window.location.href = data.url;
     } catch (err) {
       console.error("checkout error:", err);
-      alert("Fetch failed or timed out (check console).");
+      toast.error('Checkout failed — please try again.');
       setIsCheckingOut(false);
     }
   }
@@ -106,6 +111,7 @@ function App() {
         </div>
       )}
       <main className='App'>
+        <Toaster position="bottom-center" richColors />
         <Routes id="routes">
           {/* <Route path="/" element={<HomePage />} /> */}
           <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} isCheckingOut={isCheckingOut} />} />

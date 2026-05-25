@@ -2,6 +2,7 @@ import stripe from "../config/stripe.js";
 import CheckoutAttempt from "../model/CheckoutAttempt.js";
 import Order from "../model/Order.js";
 import { webhookEvents, webhookFailures } from "../metrics.js";
+import { sendOrderNotfications } from "../slack.js";
 
 
 export async function stripeWebhook(req, res) {
@@ -44,7 +45,7 @@ if (event.type === "checkout.session.completed") {
 
     const existing = await Order.findOne({ stripeSessionId: session.id });
     if (!existing) {
-      await Order.create({
+      const order = await Order.create({
         stripeSessionId: session.id,
         paymentIntentId: session.payment_intent,
         items: attempt.cart,
@@ -52,7 +53,9 @@ if (event.type === "checkout.session.completed") {
         currency: session.currency ?? "usd",
         status: "paid",
       });
+      sendOrderNotfications(order).catch(() => {});
     }
+
 
     await CheckoutAttempt.updateOne(
       { _id: attempt._id },

@@ -36,3 +36,23 @@ jobs:
       - run: npm test
         env:
           STRIPE_SECRET_KEY: sk_test_dummy
+
+  deploy-uat:
+    needs: [frontend, backend]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render UAT deploy
+        run: curl -X POST "$RENDER_UAT_DEPLOY_HOOK"
+        env:
+          RENDER_UAT_DEPLOY_HOOK: ${{ secrets.RENDER_UAT_DEPLOY_HOOK }}
+
+  deploy-prod:
+    needs: [frontend, backend]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render PROD deploy
+        run: curl -X POST "$RENDER_PROD_DEPLOY_HOOK"
+        env:
+          RENDER_PROD_DEPLOY_HOOK: ${{ secrets.RENDER_PROD_DEPLOY_HOOK }}

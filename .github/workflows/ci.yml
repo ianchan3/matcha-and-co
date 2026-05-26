@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [production, UAT]
   pull_request:
-    branches: [main, develop]
+    branches: [production, UAT]
 
 jobs:
   frontend:

@@ -20,7 +20,7 @@ function App() {
 
   function addToCart(item, qty) {
     const qtyNum = Number(qty) || 1;
-
+//
     //prev is the most up-to-date previous cart array
     setCart((prev) => {
       const existingItem = prev.find((x) => x.id === item.id);

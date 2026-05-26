@@ -34,3 +34,5 @@ jobs:
           cache-dependency-path: server/package-lock.json
       - run: npm ci --legacy-peer-deps
       - run: npm test
+        env:
+          STRIPE_SECRET_KEY: sk_test_dummy

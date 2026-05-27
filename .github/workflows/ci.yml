@@ -52,9 +52,11 @@ jobs:
       - name: Start backend server
         run: node server.js &
         working-directory: server
-      - run: npx playwright test
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      - name: Wait for backend to be ready
+        run: until curl -s http://localhost:4242/health; do sleep 1; done
+      - run: npx playwright test
+        env:
           VITE_API_URL: http://localhost:4242
-      - run: sleep 8

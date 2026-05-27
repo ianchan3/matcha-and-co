@@ -52,6 +52,7 @@ jobs:
       - name: Start backend server
         run: node server.js &
         working-directory: server
+      - run: npx playwright test
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}

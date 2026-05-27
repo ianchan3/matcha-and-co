@@ -56,4 +56,5 @@ jobs:
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      - run: sleep 3
+          VITE_API_URL: http://localhost:4242
+      - run: sleep 8

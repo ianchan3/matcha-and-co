@@ -1,14 +1,19 @@
 import './NavBar.css';
-import { Link } from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBar({ cartCount, onCartOpen}) {
   return (
-    <main className="NavBar">
-      <div id='matcha'>Order Matcha!!!</div>
-      <nav>
-      {/* <li><Link to ="/menu" className='logo'>Menu Page</Link></li> */}
-      {/* <li><Link to ="/contact" className='logo'>Contact Us Page</Link></li> */}
-      </nav>
-    </main>
+    <header className="NavBar">
+      <div className="NavBrand">
+        <span className="NavLogo">✦</span>
+        <span className="NavName">Matcha & Co.</span>
+      </div>
+        <span className="NavTagline">Small batch matcha, made with care.</span>
+      {onCartOpen && (
+        <button className="CartToggleBtn" onClick={onCartOpen}>
+          🛒 Cart
+          {cartCount > 0 && <span className="CartBadge">{cartCount}</span>}
+        </button>
+        )}
+    </header>
   );
 }

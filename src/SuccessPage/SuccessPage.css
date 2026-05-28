@@ -1,6 +1,6 @@
 .SuccessPage {
   min-height: 100vh;
-  background: #f9faf4;
+  background: var(--color-bg);
 }
 
 .SuccessCard {
@@ -8,40 +8,41 @@
   margin: 40px auto;
   padding: 32px;
   border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+  background: var(--color-cream);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
 .SuccessTitle {
-  font-size: 24px;
+  font-family: var(--font-display);
+  font-size: 26px;
   margin: 0;
-  color: #222;
+  color: var(--color-text);
   text-align: center;
 }
 
 .SuccessSubtitle {
   text-align: center;
-  color: #555;
+  color: var(--color-text-muted);
   margin: 0;
+  font-size: 15px;
 }
 
 .SuccessRef {
   text-align: center;
-  color: #555;
+  color: var(--color-text-muted);
   font-size: 14px;
   margin: 0;
 }
 
 .SuccessItemsList {
   list-style: none;
-  padding: 0;
-  margin: 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
   padding: 8px 0;
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .SuccessItem {
@@ -50,12 +51,12 @@
   align-items: center;
   padding: 8px 0;
   font-size: 15px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--color-border);
 }
 .SuccessItem:last-child { border-bottom: none; }
 
-.SuccessItemName { color: #333; }
-.SuccessItemPrice { font-weight: 600; color: #222; }
+.SuccessItemName { color: var(--color-text); }
+.SuccessItemPrice { font-weight: 600; color: var(--color-text); }
 
 .SuccessTotal {
   display: flex;
@@ -64,32 +65,33 @@
   font-size: 18px;
   font-weight: 700;
   padding: 8px 0;
-  border-top: 2px solid rgb(169, 189, 70);
+  border-top: 2px solid var(--color-sage);
+  color: var(--color-text);
 }
 
 .SuccessBackBtn {
   display: block;
   text-align: center;
   margin-top: 8px;
-  background: rgb(169, 189, 70);
-  color: #222;
-  border: 2px solid #222;
+  background: var(--color-sage);
+  color: white;
+  border: none;
   border-radius: 12px;
   padding: 14px;
   font-size: 16px;
   font-weight: 600;
   text-decoration: none;
-  transition: opacity 0.15s ease;
+  transition: background 0.15s ease;
 }
-.SuccessBackBtn:hover { opacity: 0.85; }
+.SuccessBackBtn:hover { background: var(--color-sage-dark); }
 
 .SuccessSpinner {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin: 24px auto;
-  border: 4px solid #e8efd0;
-  border-top-color: rgb(169, 189, 70);
+  border: 4px solid var(--color-sage-light);
+  border-top-color: var(--color-sage);
   animation: spin 0.8s linear infinite;
 }
 
@@ -100,14 +102,14 @@
 
 .SuccessLoadingText {
   text-align: center;
-  color: #555;
+  color: var(--color-text-muted);
   font-size: 15px;
   margin: 0;
 }
 
 .SuccessError {
   text-align: center;
-  color: #888;
+  color: var(--color-text-muted);
   font-size: 14px;
   margin: 0;
   font-style: italic;

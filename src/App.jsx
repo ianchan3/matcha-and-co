@@ -103,7 +103,7 @@ function App() {
         <div style={{
           background: "orange",
           padding: "6px",
-          margin: "0 30% 0 30%",
+          margin: "0",
           textAlign: "center",
           fontWeight: "bold"
         }}>

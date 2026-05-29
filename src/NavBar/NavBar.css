@@ -47,16 +47,6 @@
   font-weight: 600;
   color: var(--color-text);
   letter-spacing: 0.5px;
-<<<<<<< HEAD
-=======
-}
-
-.NavTagline {
-  font-size: 13px;
-  color: var(--color-text-muted);
-  font-style: italic;
-  font-family: var(--font-display);
->>>>>>> production
 }
 
 @media (max-width: 600px) {

@@ -1,39 +1,73 @@
-.NavBar > nav {
-  display: grid;
-  grid-template-columns: repeat(1,1fr);
-  place-items: center;
-}
-
 .NavBar {
-  padding: 30px;
-  background-color: white;
+  background-color: var(--color-cream);
+  border-bottom: 1px solid var(--color-border);
+  padding: 18px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
-.NavBar a {
-  color: rgb(169, 189, 70);
+.NavBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.logo {
-  text-decoration: none;
-  font-weight: bold;
+.CartToggleBtn {
+  background: var(--color-sage);
+  border: none;
+  border-radius: 50px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.15s ease;
+}
+.CartToggleBtn:hover {
+  background: var(--color-sage-dark);
 }
 
-nav > li {
-  list-style-type: none;
+.NavLogo {
+  color: var(--color-sage);
+  font-size: 20px;
 }
 
-#matcha {
-  color: rgb(169, 189, 70);
-  font-size: 30px;
-  text-align: center;
+.NavName {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.5px;
+}
+
+.NavTagline {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-family: var(--font-display);
 }
 
 @media (max-width: 600px) {
   .NavBar {
-    padding: 16px 12px;
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
   }
 
-  #matcha {
-    font-size: 22px;
+  .NavName {
+    font-size: 18px;
+  }
+
+  .NavTagline {
+    font-size: 12px;
   }
 }

@@ -10,14 +10,14 @@
 }
 
 .loading-card {
-  background: #fff;
+  background: var(--color-cream);
   border-radius: 20px;
   padding: 32px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 /* ── SVG parts ── */
@@ -65,24 +65,24 @@
 .foot  { stroke-width: 4; }
 
 .cup-body {
-  fill: #a8d5a2;
-  stroke: #6aaa64;
+  fill: var(--color-sage-light);
+  stroke: var(--color-sage);
   stroke-width: 1.5;
   stroke-linejoin: round;
 }
 
 .cup-rim {
-  fill: #6aaa64;
+  fill: var(--color-sage);
 }
 
 .matcha-surface {
-  fill: #7ec87a;
+  fill: var(--color-sage);
   opacity: 0.7;
 }
 
 .cup-handle {
   fill: none;
-  stroke: #6aaa64;
+  stroke: var(--color-sage);
   stroke-width: 3;
   stroke-linecap: round;
 }
@@ -91,7 +91,7 @@
 
 .steam {
   fill: none;
-  stroke: #b8ddb5;
+  stroke: var(--color-sage-light);
   stroke-width: 2.5;
   stroke-linecap: round;
   opacity: 0;
@@ -125,7 +125,7 @@
 
 .loading-text {
   font-size: 1rem;
-  color: #4a3728;
+  color: var(--color-text);
   font-weight: 600;
   margin: 0;
 }
@@ -139,7 +139,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #7ec87a;
+  background: var(--color-sage);
   animation: dot-bounce 1.2s ease-in-out infinite;
 }
 
@@ -153,7 +153,7 @@
 
 .slow-message {
   font-size: 0.85rem;
-  color: #7a6050;
+  color: var(--color-text-muted);
   text-align: center;
   max-width: 220px;
   margin: 0;

@@ -25,12 +25,12 @@ export default function MenuPage({
   const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   const menuItems = [
-    { id: "matcha", name: "Matcha Latte", priceCents: 799, photo: MatchaLatte },
-    { id: "blueberrymatcha", name: "Blueberry Matcha", priceCents: 999, photo: BlueberryMatcha },
-    { id: "strawberrymatcha", name: "Strawberry Matcha", priceCents: 999, photo: StrawberryMatcha },
-    { id: "bananamatcha", name: "Banana Matcha", priceCents: 999, photo: BananaMatcha },
-    { id: "mangomatcha", name: "Mango Matcha", priceCents: 999, photo: MangoMatcha },
-    { id: "coconutmatcha", name: "Coconut Matcha", priceCents: 999, photo: CoconutMatcha },
+    { id: "matcha", name: "Matcha Latte", priceCents: 799, photo: MatchaLatte, description: "Ceremonial grade matcha with steamed oat milk." },
+    { id: "blueberrymatcha", name: "Blueberry Matcha", priceCents: 999, photo: BlueberryMatcha, description: "Vibrant wild blueberry swirled with house matcha." },
+    { id: "strawberrymatcha", name: "Strawberry Matcha", priceCents: 999, photo: StrawberryMatcha, description: "Fresh strawberry purée layered over smooth matcha." },
+    { id: "bananamatcha", name: "Banana Matcha", priceCents: 999, photo: BananaMatcha, description: "Creamy banana blended with earthy ceremonial matcha." },
+    { id: "mangomatcha", name: "Mango Matcha", priceCents: 999, photo: MangoMatcha, description: "Tropical mango and matcha — sweet meets earthy." },
+    { id: "coconutmatcha", name: "Coconut Matcha", priceCents: 999, photo: CoconutMatcha, description: "Toasted coconut milk with a double shot of matcha." },
   ]
 
   //making sure that activeItemId actually matches an item in the menuItems array
@@ -58,9 +58,12 @@ export default function MenuPage({
   return (
     <main className="MenuPage">
       {isCheckingOut && <LoadingDrink />}
-      <NavBar />
+      <NavBar cartCount={cartCount} onCartOpen={() => 
+        setIsCartOpen(true)
+      }/>
       <div id="MenuItemsListContainer">
-        <h1>Select an Item</h1>
+        <h1>Our Menu</h1>
+        <p className="MenuSubtitle">Handcrafted drinks made fresh to order.</p>
         {activeItem && (
           <div className="ModalOverlay" onClick={closeModal}>
             <div className="Modal" onClick={(e) => e.stopPropagation()}>
@@ -99,27 +102,22 @@ export default function MenuPage({
           {menuItems.map((item) => (
             <div className="MenuItem" key={item.id}>
               <button className="MenuItemButton" onClick={() => openModal(item.id)}>
-                <img src={item.photo} width='100px' height='75px' alt={item.id} />
+                <img src={item.photo} alt={item.name} className="MenuItemPhoto" />
                 <div className="MenuItemText">
                   <h2>{item.name}</h2>
-                  <p>${(item.priceCents / 100).toFixed(2)}</p>
+                  <p className="MenuItemDescription">{item.description}</p>
+                  <span className="MenuItemPrice">${(item.priceCents / 100).toFixed(2)}</span>
                 </div>
               </button>
             </div>
           ))}
         </section>
- 
-        <button className="CartToggleBtn" onClick={() => setIsCartOpen(true)}>
-          🛒 Cart
-          {cartCount > 0 && <span className="CartBadge">{cartCount}</span>}
-        </button>
-
 
         {isCartOpen && (
           <div className="CartDrawerOverlay" onClick={() => setIsCartOpen(false)} />
         )}
 
-   
+
         <div className={`CartDrawer ${isCartOpen ? 'CartDrawerOpen' : ''}`}>
           <div className="CartDrawerHeader">
             <h3>Your Cart</h3>

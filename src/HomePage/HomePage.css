@@ -1,0 +1,49 @@
+.Introduction,
+.AboutUs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background-color: var(--color-bg);
+  gap: 64px;
+  padding: 0 80px;
+  text-align: center;
+  height: calc(100vh - 64px);
+}
+
+
+
+.Introduction img {
+  width: 45vw;
+  height: calc(85vh - 64px);
+  object-fit: fill;
+  border-radius: 12px;
+}
+
+
+.AboutUsImage img {
+  width: 45vw;
+  height: calc(85vh - 64px);
+  object-fit: cover;
+  object-position: 0% 70%;
+  border-radius: 12px;
+}
+
+.Footer {
+  background-color: lightyellow;
+}
+
+.IntroCTA {
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  background-color: var(--color-sage);
+  padding: 14px 36px;
+  transition: background 0.2s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.IntroCTA:hover {
+  background-color: var(--color-sage-dark);
+}

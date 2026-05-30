@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 
 async function addMatchaToCart(page) {
 
-  await page.goto('/');
+  await page.goto('/menu');
   await page.getByRole('button', { name: 'Matcha Latte' }).click();
   await page.getByRole('button', { name: 'Add 1 to Cart' }).click();
 }

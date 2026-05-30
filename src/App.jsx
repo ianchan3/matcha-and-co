@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import React from "react";
 import { Navigate } from "react-router-dom"
 import MenuPage from "./MenuPage/MenuPage";
+import HomePage from "./HomePage/HomePage";
 import SuccessPage from "./SuccessPage/SuccessPage";
 import ContactPage from "./ContactPage/ContactPage";
 import { Toaster, toast} from 'sonner'
@@ -113,11 +114,11 @@ function App() {
       <main className='App'>
         <Toaster position="bottom-center" richColors />
         <Routes id="routes">
-          {/* <Route path="/" element={<HomePage />} /> */}
+          <Route path="/" element={<HomePage />} />
           <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} isCheckingOut={isCheckingOut} />} />
           <Route path="/success" element={<SuccessPage removeWholeCart={removeWholeCart}/>} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<Navigate to="/menu" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </>

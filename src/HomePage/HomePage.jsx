@@ -1,5 +1,5 @@
 import NavBar from "../NavBar/NavBar"
-import "./homepage.css"
+import "../HomePage/HomePage.css"
 import { useNavigate } from "react-router-dom";
 
 

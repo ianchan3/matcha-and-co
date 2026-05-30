@@ -3,7 +3,7 @@ import "../HomePage/HomePage.css"
 import { useNavigate } from "react-router-dom";
 
 
-export default function HomePage({ cartCount, onCartOpen }) {
+export default function HomePage() {
 
   const navigate = useNavigate();
 

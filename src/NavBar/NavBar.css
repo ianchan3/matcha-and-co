@@ -2,9 +2,9 @@
   background-color: var(--color-cream);
   border-bottom: 1px solid var(--color-border);
   padding: 18px 32px;
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-between;
+  grid-template-columns: 1fr 1fr 1fr;
   position: sticky;
   top: 0;
   z-index: 50;
@@ -13,7 +13,31 @@
 .NavBrand {
   display: flex;
   align-items: center;
+  justify-self: start;
   gap: 8px;
+}
+
+.NavOptions {
+  justify-self: center;
+}
+
+.NavCartSlot {
+  justify-self: end;
+}
+
+a {
+  text-decoration: none;
+
+}
+
+.NavOptions a {
+  color: black;
+}
+
+.NavOptions {
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }
 
 .CartToggleBtn {

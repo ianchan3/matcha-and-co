@@ -1,0 +1,108 @@
+.Footer {
+  background-color: var(--color-text);
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 64px;
+  padding: 50px 80px;
+  text-align: center;
+  min-height: calc(35vh - 64px);
+  align-items: center;
+}
+
+#BrandNameColumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#BrandName {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  color: white;
+}
+
+#SocialMediaColumn p {
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+}
+
+#QuestionsColumn p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.8;
+  margin: 0;
+}
+
+#QuestionsColumn a {
+  color: var(--color-sage);
+  text-decoration: none;
+}
+
+#QuestionsColumn a:hover {
+  text-decoration: underline;
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  column-gap: 12px;
+}
+
+.icon {
+  color: white;
+  width: 45px;
+  height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 50%;
+  outline: 2px solid var(--color-sage);
+  background-color: var(--color-sage);
+  transition-property: outline-offset, outline-color, background-color;
+  transition-duration: .25s;
+}
+
+.icon:hover {
+  outline-offset: 4px;
+}
+
+.icon:hover i {
+  animation: shake .25s;
+}
+
+.icon--instagram:hover {
+  background-image: radial-gradient(circle at 30% 107%,
+    #fdf497 0%, #fccc63 5%,
+    #fd5949 45%, #d6249f 60%,
+    #285AEB 90%);
+  outline-color: #a02d76;
+}
+
+.icon--twitter:hover {
+  background-color: #1da1f2;
+  outline-color: #1da1f2;
+}
+
+.icon--facebook:hover {
+  background-color: #387AE3;
+  outline-color: #387AE3;
+}
+
+.icon--linkedin:hover {
+  background-color: #0077b5;
+  outline-color: #0077b5;
+}
+
+@keyframes shake {
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(15deg); }
+  40% { transform: rotate(-15deg); }
+}

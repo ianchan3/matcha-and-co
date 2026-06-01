@@ -1,5 +1,6 @@
 import NavBar from "../NavBar/NavBar"
 import "../HomePage/HomePage.css"
+import Footer from "../Footer/Footer";
 import { useNavigate } from "react-router-dom";
 
 
@@ -13,11 +14,10 @@ export default function HomePage() {
       <div className="HomePageContainer">
         <section className="Introduction">
           <div>
-
-          <img
-            src="https://images.pexels.com/photos/5976079/pexels-photo-5976079.jpeg"
-            alt="Person whisking matcha"
-          />
+            <img
+              src="https://images.pexels.com/photos/5976079/pexels-photo-5976079.jpeg"
+              alt="Person whisking matcha"
+            />
           </div>
           <div>
             <p className="IntroEyebrow">✦</p>
@@ -39,9 +39,8 @@ export default function HomePage() {
             />
           </div>
         </section>
-        <section className="Footer">
-          <div>Footer</div>
-        </section>
+        <Footer />
+
       </div>
 
     </div>

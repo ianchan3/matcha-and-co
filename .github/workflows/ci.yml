@@ -1,8 +1,6 @@
 name: CI
 
 on:
-  push:
-    branches: [production, UAT]
   pull_request:
     branches: [production, UAT]
 

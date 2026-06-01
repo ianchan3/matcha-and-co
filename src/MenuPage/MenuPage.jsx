@@ -7,6 +7,7 @@ import StrawberryMatcha from "../assets/StrawberryMatchaLatte.jpg";
 import BananaMatcha from "../assets/BananaMatcha.jpeg";
 import MangoMatcha from "../assets/MangoMatcha.jpg";
 import CoconutMatcha from "../assets/CoconutMatcha.jpg";
+import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import LoadingDrink from "../LoadingDrink/LoadingDrink";
 
@@ -178,6 +179,7 @@ export default function MenuPage({
           </div>
         </div>
       </div>
+      <Footer />
     </main>
   )
 }

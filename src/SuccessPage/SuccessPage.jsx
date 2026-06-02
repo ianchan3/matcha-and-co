@@ -1,5 +1,5 @@
 import "./SuccessPage.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 
@@ -12,8 +12,12 @@ export default function SuccessPage({ removeWholeCart }) {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
 
-  useEffect(() => {
+  const stableRemoveWholeCart = useCallback(() => {
     removeWholeCart?.();
+  }, [removeWholeCart]);
+
+  useEffect(() => {
+    stableRemoveWholeCart();
     fetch("/api/cart", { method: "GET" }).catch(() => {});
 
     if (!sessionId) {
@@ -29,7 +33,7 @@ export default function SuccessPage({ removeWholeCart }) {
       })
       .then((data) => { setOrderData(data); setLoading(false); })
       .catch((err) => { setError(err.message); setLoading(false); });
-  }, []);
+  }, [stableRemoveWholeCart, sessionId]);
 
   return (
     <main className="SuccessPage">

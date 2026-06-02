@@ -17,8 +17,6 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm test
-      
-
   backend:
     runs-on: ubuntu-latest
     defaults:
@@ -35,6 +33,9 @@ jobs:
       - run: npm test
         env:
           STRIPE_SECRET_KEY: sk_test_dummy
+          GOOGLE_CLIENT_ID: dummy_client_id
+          GOOGLE_CLIENT_SECRET: dummy_client_secret
+          SESSION_SECRET: dummy_session_secret
   e2e:
     runs-on: ubuntu-latest
     steps:

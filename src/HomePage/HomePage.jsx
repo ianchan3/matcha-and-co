@@ -13,13 +13,13 @@ export default function HomePage() {
       <NavBar />
       <div className="HomePageContainer">
         <section className="Introduction">
-          <div>
+          <div className="IntroImage">
             <img
               src="https://images.pexels.com/photos/5976079/pexels-photo-5976079.jpeg"
               alt="Person whisking matcha"
             />
           </div>
-          <div>
+          <div className="IntroText">
             <p className="IntroEyebrow">✦</p>
             <h1 className="IntroHeading">Matcha, Crafted<br />with Intention</h1>
             <p className="IntroSubtitle">Premium matcha drinks made fresh to order — every cup a moment of calm.</p>

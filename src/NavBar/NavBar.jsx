@@ -10,14 +10,16 @@ export default function NavBar({ cartCount, onCartOpen }) {
       </div>
       <div className='NavOptions'>
         <Link to='/menu'>Our Menu</Link>
+        <Link to="/contact">Contact</Link>
+
       </div>
       <div className='NavCartSlot'>
-      {onCartOpen && (
-        <button className="CartToggleBtn" onClick={onCartOpen}>
-          🛒 Cart
-          {cartCount > 0 && <span className="CartBadge">{cartCount}</span>}
-        </button>
-      )}
+        {onCartOpen && (
+          <button className="CartToggleBtn" onClick={onCartOpen}>
+            🛒 Cart
+            {cartCount > 0 && <span className="CartBadge">{cartCount}</span>}
+          </button>
+        )}
 
       </div>
     </header>

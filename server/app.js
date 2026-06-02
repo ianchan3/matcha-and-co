@@ -3,6 +3,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import webhooksRoutes from './routes/webhooks.js';
 import checkoutRoutes from './routes/checkout.js';
+import contactRoutes from './routes/contact.js';
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(
 app.use('/webhooks', webhooksRoutes);
 app.use(express.json());
 app.use('/checkout', checkoutRoutes);
+app.use('/contact', contactRoutes);
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 

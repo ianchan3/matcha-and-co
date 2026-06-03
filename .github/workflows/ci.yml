@@ -17,6 +17,7 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm test
+
   backend:
     runs-on: ubuntu-latest
     defaults:
@@ -36,6 +37,7 @@ jobs:
           GOOGLE_CLIENT_ID: dummy_client_id
           GOOGLE_CLIENT_SECRET: dummy_client_secret
           SESSION_SECRET: dummy_session_secret
+
   e2e:
     runs-on: ubuntu-latest
     steps:
@@ -54,8 +56,11 @@ jobs:
         env:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
       - name: Wait for backend to be ready
-        run: until curl -s http://localhost:4242/health; do sleep 1; done
+        run: timeout 30 bash -c 'until curl -s http://localhost:4242/health; do sleep 1; done'
       - run: npx playwright test
         env:
           VITE_API_URL: http://localhost:4242

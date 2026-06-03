@@ -1,7 +1,16 @@
 import './NavBar.css';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc'
+
+
 
 export default function NavBar({ cartCount, onCartOpen }) {
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242'
+
+
+  const { user } = useContext(AuthContext)
   return (
     <header className="NavBar">
       <div className="NavBrand">
@@ -11,7 +20,17 @@ export default function NavBar({ cartCount, onCartOpen }) {
       <div className='NavOptions'>
         <Link to='/menu'>Our Menu</Link>
         <Link to="/contact">Contact</Link>
-
+        {user ? (
+          <div className="NavUser">
+            <img src={user.photo} alt={user.displayName} className="NavUserPhoto" />
+            <a href={`${apiUrl}/auth/logout`}>Logout</a>
+          </div>
+        ) : (
+          <a href={`${apiUrl}/auth/google`} className="SignInBtn">
+            <FcGoogle size={20} />
+            Sign in with Google
+          </a>
+        )}
       </div>
       <div className='NavCartSlot'>
         {onCartOpen && (

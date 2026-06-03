@@ -5,14 +5,16 @@ const router = express.Router()
 
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
+
 router.get('/google/callback', passport.authenticate('google', { 
-  failureRedirect: '/',
-  successRedirect: 'http://localhost:5173'  
+  failureRedirect: FRONTEND_URL,
+  successRedirect: FRONTEND_URL
 }))
 
 router.get('/logout', (req, res) => {
   req.logout(() => {
-    res.redirect('http://localhost:5173')
+    res.redirect(FRONTEND_URL)
   })
 })
 

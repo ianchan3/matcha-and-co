@@ -5,7 +5,10 @@ import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 
 
+
 export default function NavBar({ cartCount, onCartOpen }) {
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242'
+
 
   const { user } = useContext(AuthContext)
   return (
@@ -20,10 +23,10 @@ export default function NavBar({ cartCount, onCartOpen }) {
         {user ? (
           <div className="NavUser">
             <img src={user.photo} alt={user.displayName} className="NavUserPhoto" />
-            <a href="http://localhost:4242/auth/logout">Logout</a>
+            <a href={`${apiUrl}/auth/logout`}>Logout</a>
           </div>
         ) : (
-          <a href="http://localhost:4242/auth/google" className="SignInBtn">
+          <a href={`${apiUrl}/auth/google`} className="SignInBtn">
             <FcGoogle size={20} />
             Sign in with Google
           </a>

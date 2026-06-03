@@ -4,12 +4,14 @@ import { createContext, useState, useEffect } from 'react'
 export const AuthContext = createContext(null)
 
 export default function AuthProvider({ children }) {
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242'
+
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     async function fetchUser() {
       try {
-        const res = await fetch('http://localhost:4242/auth/me', {
+        const res = await fetch(`${apiUrl}/auth/me`, {
           credentials: 'include'
         })
         if (res.ok) {

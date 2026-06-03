@@ -1,37 +1,50 @@
-import express from 'express';
-import cors from 'cors';
-import 'dotenv/config';
-import webhooksRoutes from './routes/webhooks.js';
-import checkoutRoutes from './routes/checkout.js';
-import contactRoutes from './routes/contact.js';
+  import express from 'express';
+  import cors from 'cors';
+  import 'dotenv/config';
+  import webhooksRoutes from './routes/webhooks.js';
+  import checkoutRoutes from './routes/checkout.js';
+  import contactRoutes from './routes/contact.js';
+  import session from 'express-session';
+  import authRoutes from './routes/auth.js';
+  import passport from 'passport';
+  import './config/passport.js'; 
 
-const app = express();
+  const app = express();
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:5174',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    process.env.FRONTEND_URL,
+  ].filter(Boolean);
 
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-      if (origin.endsWith('.vercel.app')) return callback(null, true);
-      return callback(new Error('Not allowed by CORS'));
-    },
-    credentials: false,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
+  app.use(
+    cors({
+      origin(origin, callback) {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        if (origin.endsWith('.vercel.app')) return callback(null, true);
+        return callback(new Error('Not allowed by CORS'));
+      },
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    })
+  );
 
-app.use('/webhooks', webhooksRoutes);
-app.use(express.json());
-app.use('/checkout', checkoutRoutes);
-app.use('/contact', contactRoutes);
+  app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  }))
+  app.use(passport.initialize())
+  app.use(passport.session())
 
-app.get('/health', (req, res) => res.json({ status: 'ok' }));
+  app.use(express.json());
+  app.use('/auth', authRoutes);
+  app.use('/webhooks', webhooksRoutes);
+  app.use('/checkout', checkoutRoutes);
+  app.use('/contact', contactRoutes);
 
-export default app;
+  app.get('/health', (req, res) => res.json({ status: 'ok' }));
+
+  export default app;

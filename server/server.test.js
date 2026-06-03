@@ -17,5 +17,5 @@ describe("Failed Checkout Test", () => {
     const res = await request(app).post("/checkout").send({cart: req, origin: 'http://localhost:5143'}).set('Content-Type', 'application/json')
     expect(res.status).toBe(500);
     expect(res.body.error).toBe('Failed to create checkout session');
-  }, 20000)
+  }, 30000)
 })

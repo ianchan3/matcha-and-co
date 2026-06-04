@@ -33,6 +33,7 @@ export async function create(req, res) {
       mode: "payment",
       line_items,
       customer_creation: "always",
+      invoice_creation: { enabled: true },
       success_url: `${frontendUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${frontendUrl}/menu`,
     });

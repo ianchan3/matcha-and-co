@@ -1,5 +1,5 @@
 import "./SuccessPage.css";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 

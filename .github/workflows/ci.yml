@@ -32,11 +32,12 @@ jobs:
           cache-dependency-path: server/package-lock.json
       - run: npm ci --legacy-peer-deps
       - run: npm test
-        env:
-          STRIPE_SECRET_KEY: sk_test_dummy
-          GOOGLE_CLIENT_ID: dummy_client_id
-          GOOGLE_CLIENT_SECRET: dummy_client_secret
-          SESSION_SECRET: dummy_session_secret
+  env:
+    STRIPE_SECRET_KEY: sk_test_dummy
+    GOOGLE_CLIENT_ID: dummy_client_id
+    GOOGLE_CLIENT_SECRET: dummy_client_secret
+    SESSION_SECRET: dummy_session_secret
+    MONGODB_URI: mongodb://localhost:27017/test
 
   e2e:
     runs-on: ubuntu-latest

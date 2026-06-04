@@ -5,7 +5,6 @@
   import checkoutRoutes from './routes/checkout.js';
   import contactRoutes from './routes/contact.js';
   import session from 'express-session';
-  import MongoStore from 'connect-mongo';
   import authRoutes from './routes/auth.js';
   import passport from 'passport';
   import './config/passport.js'; 
@@ -37,9 +36,6 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI
-  }),
   cookie: {
     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     secure: process.env.NODE_ENV === 'production' ? true : false,
@@ -49,9 +45,9 @@ app.use(session({
   app.use(passport.initialize())
   app.use(passport.session())
 
+  app.use('/webhooks', webhooksRoutes);
   app.use(express.json());
   app.use('/auth', authRoutes);
-  app.use('/webhooks', webhooksRoutes);
   app.use('/checkout', checkoutRoutes);
   app.use('/contact', contactRoutes);
 

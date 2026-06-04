@@ -45,9 +45,9 @@ app.use(session({
   app.use(passport.initialize())
   app.use(passport.session())
 
+  app.use('/webhooks', webhooksRoutes);
   app.use(express.json());
   app.use('/auth', authRoutes);
-  app.use('/webhooks', webhooksRoutes);
   app.use('/checkout', checkoutRoutes);
   app.use('/contact', contactRoutes);
 

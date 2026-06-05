@@ -1,11 +1,10 @@
 import "./Footer.css"
 import { Link } from "react-router-dom"
+import { FaFacebook, FaInstagram, FaGoogle, FaYelp } from "react-icons/fa"
 
 export default function Footer() {
   return (
     <section className="Footer">
-      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet"></link>
-
       <div id="BrandNameColumn">
         <div id="BrandName">✦ Matcha & Co.</div>
       </div>
@@ -14,16 +13,16 @@ export default function Footer() {
         <p>Follow Us</p>
         <div className="icons">
           <a href="https://www.facebook.com" target="_blank" className="icon icon--facebook">
-            <i className="ri-facebook-line"></i>
+            <FaFacebook />
           </a>
           <a href="https://www.instagram.com" target="_blank" className="icon icon--instagram">
-            <i className="ri-instagram-line"></i>
+            <FaInstagram />
           </a>
-          <a href="https://www.twitter.com" target="_blank" className="icon icon--twitter">
-            <i className="ri-twitter-line"></i>
+          <a href="https://www.google.com/maps" target="_blank" className="icon icon--google">
+            <FaGoogle />
           </a>
-          <a href="https://www.linkedin.com" target="_blank" className="icon icon--linkedin">
-            <i className="ri-linkedin-line"></i>
+          <a href="https://www.yelp.com" target="_blank" className="icon icon--yelp">
+            <FaYelp />
           </a>
         </div>
       </div>

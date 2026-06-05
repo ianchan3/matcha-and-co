@@ -73,7 +73,7 @@
   outline-offset: 4px;
 }
 
-.icon:hover i {
+.icon:hover svg {
   animation: shake .25s;
 }
 
@@ -85,19 +85,19 @@
   outline-color: #a02d76;
 }
 
-.icon--twitter:hover {
-  background-color: #1da1f2;
-  outline-color: #1da1f2;
-}
-
 .icon--facebook:hover {
   background-color: #387AE3;
   outline-color: #387AE3;
 }
 
-.icon--linkedin:hover {
-  background-color: #0077b5;
-  outline-color: #0077b5;
+.icon--google:hover {
+  background-image: linear-gradient(135deg, #DB4437 0%, #F4B400 33%, #0F9D58 66%, #4285F4 100%);
+  outline-color: #4285F4;
+}
+
+.icon--yelp:hover {
+  background-color: #d32323;
+  outline-color: #d32323;
 }
 
 @keyframes shake {

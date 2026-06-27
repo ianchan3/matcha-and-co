@@ -1,7 +1,7 @@
 import { metrics } from '@opentelemetry/api';
 
 
-// Creates a meter to meaure things, like a ruler and restaurant order is the name of the ruler
+// Creates a meter to measure things, like a ruler and restaurant order is the name of the ruler
 const meter = metrics.getMeter('restaurant-order');
 
 export const checkoutAttempts = meter.createCounter('checkout_attempts_total', {

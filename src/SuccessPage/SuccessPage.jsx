@@ -50,7 +50,8 @@ export default function SuccessPage({ removeWholeCart }) {
               <p className="SuccessError">Could not load order details — but your payment went through.</p>
             ) : (
               <>
-                <p className="SuccessRef">Order Confirmation #: <strong>#{orderData.orderRef}</strong></p>
+                <p className="SuccessRef">Receipt #: <strong>#{orderData.orderRef}</strong></p>
+                <p className="SuccessPickup">Show this receipt or give your name — <strong>{orderData.customerName ?? 'your name'}</strong> — at pickup.</p>
                 <ul className="SuccessItemsList">
                   {orderData.items.map((item, i) => (
                     <li key={i} className="SuccessItem">

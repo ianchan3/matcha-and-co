@@ -13,6 +13,8 @@ const OrderSchema = new mongoose.Schema(
   {
     stripeSessionId: { type: String, required: true, unique: true },
     paymentIntentId: { type: String },
+    receiptNumber: {type: String},
+    customerName: {type: String},
     items: { type: [OrderItemSchema], required: true },
     amountTotalCents: { type: Number, required: true },
     currency: { type: String, default: "usd" },

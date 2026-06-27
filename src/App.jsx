@@ -23,15 +23,15 @@ function App() {
     const qtyNum = Number(qty) || 1;
 //
     //prev is the most up-to-date previous cart array
-    setCart((prev) => {
-      const existingItem = prev.find((x) => x.id === item.id);
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((x) => x.id === item.id);
 
       if (existingItem) {
-        return prev.map((x) =>
+        return prevCart.map((x) =>
           x.id === item.id ? { ...x, qty: x.qty + qtyNum } : x
         );
       }
-      return [...prev, { ...item, qty: qtyNum }];
+      return [...prevCart, { ...item, qty: qtyNum }];
     });
     toast.success(`Added ${item.name} to cart`);
   }

@@ -53,10 +53,11 @@ jobs:
         working-directory: server
       - run: npx playwright install --with-deps
       - name: Start backend server
-        run: node server.js &
+        run: node --import ./tracing.js server.js &
         working-directory: server
         env:
           NODE_ENV: ci
+          OTEL_SERVICE_NAME: restaurant-order-api
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -69,3 +70,6 @@ jobs:
       - run: npx playwright test
         env:
           VITE_API_URL: http://localhost:4242
+
+      - name: Wait for OTel flush
+        run: sleep 35

@@ -16,6 +16,7 @@ import tracePkg from '@opentelemetry/exporter-trace-otlp-http';
 const { OTLPTraceExporter } = tracePkg;
 
 // Extract "Basic BASE64STRING" from "Authorization=Basic BASE64STRING"
+
 const authHeader = (process.env.OTEL_EXPORTER_OTLP_HEADERS || '').replace('Authorization=', '');
 
 const sdk = new NodeSDK({

@@ -6,7 +6,7 @@ import { checkoutAttempts, checkoutSuccesses, checkoutFailures } from "../metric
 
 
 export async function create(req, res) {
-    checkoutAttempts.add(1);
+  checkoutAttempts.add(1);
   try {
     const { cart, origin } = req.body;
 
@@ -56,21 +56,32 @@ export async function create(req, res) {
 export async function getSession(req, res) {
   try {
     const { sessionId } = req.params;
-    const attempt = await CheckoutAttempt.findOne({
-      stripeSessionId: sessionId
-    });
+    const attempt = await CheckoutAttempt.findOne({ stripeSessionId: sessionId });
     if (!attempt) return res.status(404).json({ error: "Session Not Found" });
+
     const order = await Order.findOne({ stripeSessionId: sessionId });
-    const items = order ? order.items : attempt.cart
-    const amountTotalCents =
-      order ? order.amountTotalCents
-        :
-        attempt.cart.reduce((sum, item) => sum + item.priceCents * item.qty, 0);
+    const items = order ? order.items : attempt.cart;
+    const amountTotalCents = order
+      ? order.amountTotalCents
+      : attempt.cart.reduce((sum, item) => sum + item.priceCents * item.qty, 0);
+
+    let orderRef = order?.receiptNumber ?? null;
+    let customerName = order?.customerName ?? null;
+
+    if (!orderRef || !customerName) {
+      const stripeSession = await stripe.checkout.sessions.retrieve(sessionId, {
+        expand: ['payment_intent.latest_charge']
+      });
+      customerName = customerName ?? stripeSession.customer_details?.name ?? null;
+      orderRef = orderRef ?? stripeSession.payment_intent?.latest_charge?.receipt_number ?? sessionId.slice(-8);
+    }
+
     return res.json({
       items,
       amountTotalCents,
       status: order ? order.status : attempt.status,
-      orderRef: order ? order.paymentIntentId.slice(-8) : sessionId.slice(-8),
+      orderRef,
+      customerName,
     });
   } catch (err) {
     console.error(err);

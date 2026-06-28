@@ -1,7 +1,7 @@
 import stripe from "../config/stripe.js";
 import CheckoutAttempt from "../model/CheckoutAttempt.js";
 import Order from "../model/Order.js";
-import { webhookEvents, webhookFailures } from "../metrics.js";
+import { webhookEvents, webhookFailures, ENV_LABEL } from "../metrics.js";
 import { sendOrderNotfications } from "../slack.js";
 
 
@@ -20,13 +20,13 @@ export async function stripeWebhook(req, res) {
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
-    webhookEvents.add(1, { 'event.type': event.type });
+    webhookEvents.add(1, { 'event.type': event.type, ...ENV_LABEL });
     //   If the signature doesn’t match, Stripe is not trusted → it throws an error.
     // If it succeeds, you get a real Stripe event object.
 
   } catch (err) {
     console.error("❌ Webhook signature verification failed:", err.message);
-    webhookFailures.add(1);
+    webhookFailures.add(1, ENV_LABEL);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
@@ -78,7 +78,7 @@ export async function stripeWebhook(req, res) {
         return res.status(200).send("ok");
       }
       console.error("❌ Webhook handler failed:", err);
-      webhookFailures.add(1);
+      webhookFailures.add(1, ENV_LABEL);
       return res.status(500).send("Webhook handler failed");
     }
   }

@@ -57,6 +57,7 @@ jobs:
         working-directory: server
         env:
           NODE_ENV: ci
+          OTEL_SERVICE_NAME: restaurant-order-api
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}

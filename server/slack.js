@@ -6,7 +6,7 @@ export async function sendOrderNotfications(order) {
 
   const itemLines = order.items.map(item => `• ${item.qty}× ${item.name} — $${(item.priceCents * item.qty / 100).toFixed(2)}`).join('\n');
   const total = `$${(order.amountTotalCents / 100).toFixed(2)}`;
-  const ref = order.receiptNumber ?? order.paymentIntentId.slice(-8).toUpperCase();
+  const ref = order.receiptNumber ?? order.stripeSessionId.slice(-8).toUpperCase();
   const name = order.customerName ?? 'Guest';
 
   const body = {

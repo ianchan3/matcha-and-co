@@ -33,6 +33,7 @@ jobs:
       - run: npm ci --legacy-peer-deps
       - run: npm test
     env:
+      NODE_ENV: ci
       STRIPE_SECRET_KEY: sk_test_dummy
       GOOGLE_CLIENT_ID: dummy_client_id
       GOOGLE_CLIENT_SECRET: dummy_client_secret
@@ -53,6 +54,7 @@ jobs:
         run: node server.js &
         working-directory: server
         env:
+          NODE_ENV: ci
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}

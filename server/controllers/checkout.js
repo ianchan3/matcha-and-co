@@ -2,11 +2,11 @@ import stripe from "../config/stripe.js";
 import Order from "../model/Order.js";
 import CheckoutAttempt from "../model/CheckoutAttempt.js";
 import "dotenv/config";
-import { checkoutAttempts, checkoutSuccesses, checkoutFailures } from "../metrics.js";
+import { checkoutAttempts, checkoutSuccesses, checkoutFailures, ENV_LABEL } from "../metrics.js";
 
 
 export async function create(req, res) {
-  checkoutAttempts.add(1);
+  checkoutAttempts.add(1, ENV_LABEL);
   try {
     const { cart, origin } = req.body;
 
@@ -44,11 +44,11 @@ export async function create(req, res) {
       status: "pending",
     });
 
-    checkoutSuccesses.add(1);
+    checkoutSuccesses.add(1, ENV_LABEL);
     return res.json({ url: session.url, sessionId: session.id });
   } catch (err) {
     console.error(err);
-    checkoutFailures.add(1);
+    checkoutFailures.add(1, ENV_LABEL);
     res.status(500).json({ error: "Failed to create checkout session" });
   }
 };

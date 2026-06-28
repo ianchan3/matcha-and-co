@@ -53,7 +53,7 @@ jobs:
         working-directory: server
       - run: npx playwright install --with-deps
       - name: Start backend server
-        run: node server.js &
+        run: node --import ./tracing.js server.js &
         working-directory: server
         env:
           NODE_ENV: ci

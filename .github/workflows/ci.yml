@@ -69,3 +69,6 @@ jobs:
       - run: npx playwright test
         env:
           VITE_API_URL: http://localhost:4242
+
+      - name: Wait for OTel flush
+        run: sleep 35

@@ -1,16 +1,75 @@
-# React + Vite
+# Matcha & Co. — Online Ordering App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack food ordering web app built with React, Node.js/Express, and MongoDB. Customers can browse the menu, add items to cart, and check out via Stripe. Orders trigger Slack notifications to the restaurant.
 
-Currently, two official plugins are available:
+**Live:** [matcha-and-co.com](https://matcha-and-co.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React, Vite, React Router
+- **Backend:** Node.js, Express
+- **Database:** MongoDB (Mongoose)
+- **Payments:** Stripe (Checkout + Webhooks)
+- **Auth:** Google OAuth (Passport.js)
+- **Observability:** OpenTelemetry → Grafana Cloud (Metrics, Traces, Logs)
+- **Notifications:** Slack Webhooks
+- **Testing:** Vitest, Supertest, Playwright E2E
+- **CI/CD:** GitHub Actions
+- **Hosting:** Vercel (frontend), Render (backend)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+- Menu browsing with cart (add, remove, quantity controls, persistence)
+- Stripe checkout with success page and order confirmation
+- Google OAuth login
+- Slack notifications for new orders
+- Contact form
+- Grafana alerting for checkout failures
+
+---
+
+## Local Development
+
+### Prerequisites
+
+- Node.js
+- MongoDB
+- Stripe account
+- Google OAuth credentials
+- Slack webhook URL
+
+### Setup
+
+1. Clone the repo
+2. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+3. Install backend dependencies:
+   ```bash
+   cd server && npm install
+   ```
+4. Create `server/.env` with the following variables:
+   ```
+   MONGODB_URI=
+   STRIPE_SECRET_KEY=
+   STRIPE_WEBHOOK_SECRET=
+   SLACK_WEBHOOK_URL=
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   SESSION_SECRET=
+   FRONTEND_URL=http://localhost:5173
+   NODE_ENV=development
+   ```
+5. Start the backend:
+   ```bash
+   cd server && npm run dev
+   ```
+6. Start the frontend:
+   ```bash
+   npm run dev
+   ```

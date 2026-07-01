@@ -1,16 +1,24 @@
 import { useState, useEffect } from 'react'
 import React from "react";
-import { Navigate } from "react-router-dom"
+import { Navigate, useLocation } from "react-router-dom";
 import MenuPage from "./MenuPage/MenuPage";
 import HomePage from "./HomePage/HomePage";
 import SuccessPage from "./SuccessPage/SuccessPage";
 import ContactPage from "./ContactPage/ContactPage";
-import { Toaster, toast} from 'sonner'
+import { Toaster, toast } from 'sonner'
 import './App.css'
 import { Routes, Route } from "react-router-dom";
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4242";
 const isUAT = apiUrl.includes("uat");
+
+
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
 
 function App() {
 
@@ -112,10 +120,11 @@ function App() {
       )}
       <main className='App'>
         <Toaster position="bottom-center" richColors />
+        <ScrollToTop />
         <Routes id="routes">
           <Route path="/" element={<HomePage />} />
           <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} isCheckingOut={isCheckingOut} />} />
-          <Route path="/success" element={<SuccessPage removeWholeCart={removeWholeCart}/>} />
+          <Route path="/success" element={<SuccessPage removeWholeCart={removeWholeCart} />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -15,24 +15,33 @@ const { PeriodicExportingMetricReader } = metricsPkg;
 import tracePkg from '@opentelemetry/exporter-trace-otlp-http';
 const { OTLPTraceExporter } = tracePkg;
 
-// Extract "Basic BASE64STRING" from "Authorization=Basic BASE64STRING"
+import logExporterPkg from '@opentelemetry/exporter-logs-otlp-http';
+const { OTLPLogExporter } = logExporterPkg;
 
+import logSdkPkg from '@opentelemetry/sdk-logs';
+const { SimpleLogRecordProcessor } = logSdkPkg.default ?? logSdkPkg;
+
+// Extract "Basic BASE64STRING" from "Authorization=Basic BASE64STRING"
 const authHeader = (process.env.OTEL_EXPORTER_OTLP_HEADERS || '').replace('Authorization=', '');
 
+const headers = { Authorization: authHeader };
+
 const sdk = new NodeSDK({
+  logRecordProcessor: new SimpleLogRecordProcessor(
+    new OTLPLogExporter({
+      url: `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/logs`,
+      headers,
+    })
+  ),
   traceExporter: new OTLPTraceExporter({
     url: `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/traces`,
-    headers: {
-      Authorization: authHeader,
-    },
+    headers,
   }),
   // PeriodicExportingMetricReader gathers all data every 30s and hands it to OTLPMetricExporter
   metricReader: new PeriodicExportingMetricReader({
     exporter: new OTLPMetricExporter({
       url: `${process.env.OTEL_EXPORTER_OTLP_ENDPOINT}/v1/metrics`,
-      headers: {
-        Authorization: authHeader,
-      },
+      headers,
     }),
     exportIntervalMillis: 30_000,
   }),

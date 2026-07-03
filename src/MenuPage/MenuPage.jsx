@@ -10,6 +10,7 @@ import CoconutMatcha from "../assets/CoconutMatcha.jpg";
 import Footer from "../Footer/Footer";
 import NavBar from "../NavBar/NavBar";
 import LoadingDrink from "../LoadingDrink/LoadingDrink";
+import { useTranslation } from 'react-i18next';
 
 export default function MenuPage({
   cart, addToCart, goToCheckout, removeFromCart, decreaseCartQty, increaseCartQty,
@@ -19,19 +20,18 @@ export default function MenuPage({
   const [activeItemId, setActiveItemId] = useState(null);
   const [modalQty, setModalQty] = useState(1);
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-
+  const { t } = useTranslation();
 
   const cartCount = cart.reduce((sum, x) => sum + x.qty, 0);
   const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   const menuItems = [
-    { id: "matcha", name: "Matcha Latte", priceCents: 799, photo: MatchaLatte, description: "Ceremonial grade matcha with steamed oat milk." },
-    { id: "blueberrymatcha", name: "Blueberry Matcha", priceCents: 999, photo: BlueberryMatcha, description: "Vibrant wild blueberry swirled with house matcha." },
-    { id: "strawberrymatcha", name: "Strawberry Matcha", priceCents: 999, photo: StrawberryMatcha, description: "Fresh strawberry purée layered over smooth matcha." },
-    { id: "bananamatcha", name: "Banana Matcha", priceCents: 999, photo: BananaMatcha, description: "Creamy banana blended with earthy ceremonial matcha." },
-    { id: "mangomatcha", name: "Mango Matcha", priceCents: 999, photo: MangoMatcha, description: "Tropical mango and matcha — sweet meets earthy." },
-    { id: "coconutmatcha", name: "Coconut Matcha", priceCents: 999, photo: CoconutMatcha, description: "Toasted coconut milk with a double shot of matcha." },
+    { id: "matcha", name: "Matcha Latte", priceCents: 799, photo: MatchaLatte, description: t("menu.items.matcha_desc")},
+    { id: "blueberrymatcha", name: "Blueberry Matcha", priceCents: 999, photo: BlueberryMatcha, description: t("menu.items.blueberry_desc") },
+    { id: "strawberrymatcha", name: "Strawberry Matcha", priceCents: 999, photo: StrawberryMatcha, description: t("menu.items.strawberry_desc") },
+    { id: "bananamatcha", name: "Banana Matcha", priceCents: 999, photo: BananaMatcha, description: t("menu.items.banana_desc") },
+    { id: "mangomatcha", name: "Mango Matcha", priceCents: 999, photo: MangoMatcha, description: t("menu.items.mango_desc") },
+    { id: "coconutmatcha", name: "Coconut Matcha", priceCents: 999, photo: CoconutMatcha, description: t("menu.items.coconut_desc") },
   ]
 
   //making sure that activeItemId actually matches an item in the menuItems array
@@ -55,16 +55,15 @@ export default function MenuPage({
     setModalQty((previousQty) => previousQty + 1);
   }
 
-
   return (
     <main className="MenuPage">
       {isCheckingOut && <LoadingDrink />}
-      <NavBar cartCount={cartCount} onCartOpen={() => 
+      <NavBar cartCount={cartCount} onCartOpen={() =>
         setIsCartOpen(true)
       }/>
       <div id="MenuItemsListContainer">
-        <h1>Our Menu</h1>
-        <p className="MenuSubtitle">Handcrafted drinks made fresh to order.</p>
+        <h1>{t('menu.heading')}</h1>
+        <p className="MenuSubtitle">{t('menu.subtitle')}</p>
         {activeItem && (
           <div className="ModalOverlay" onClick={closeModal}>
             <div className="Modal" onClick={(e) => e.stopPropagation()}>
@@ -77,7 +76,6 @@ export default function MenuPage({
                   alt={activeItem.name}
                   className="ModalImage"
                 />
-
                 <h2>{activeItem.name}</h2>
                 <p>${(activeItem.priceCents / 100).toFixed(2)}</p>
               </div>
@@ -93,13 +91,12 @@ export default function MenuPage({
                   closeModal();
                 }}
               >
-                Add {modalQty} to Cart
+                {t('menu.add_to_cart', { qty: modalQty })}
               </button>
             </div>
           </div>
         )}
         <section id="MenuItemsList">
-
           {menuItems.map((item) => (
             <div className="MenuItem" key={item.id}>
               <button className="MenuItemButton" onClick={() => openModal(item.id)}>
@@ -118,16 +115,15 @@ export default function MenuPage({
           <div className="CartDrawerOverlay" onClick={() => setIsCartOpen(false)} />
         )}
 
-
         <div className={`CartDrawer ${isCartOpen ? 'CartDrawerOpen' : ''}`}>
           <div className="CartDrawerHeader">
-            <h3>Your Cart</h3>
+            <h3>{t('menu.your_cart')}</h3>
             <button className="CartDrawerClose" onClick={() => setIsCartOpen(false)}>✕</button>
           </div>
 
           <div className="CartDrawerItems">
             {cart.length === 0 ? (
-              <p className="CartEmpty">Your cart is empty</p>
+              <p className="CartEmpty">{t('menu.cart_empty')}</p>
             ) : (
               cart.map((item, index) => (
                 <div className="CartRow" key={index}>
@@ -161,7 +157,7 @@ export default function MenuPage({
 
           <div className="CartDrawerFooter">
             <div className="CartTotal">
-              <span>Total ({cartCount} item{cartCount !== 1 ? 's' : ''})</span>
+              <span>{t(cartCount !== 1 ? 'menu.total_plural' : 'menu.total', { count: cartCount })}</span>
               <span className="CartTotalPrice">${(cartTotalCents / 100).toFixed(2)}</span>
             </div>
             <button
@@ -169,11 +165,11 @@ export default function MenuPage({
               disabled={cart.length === 0}
               onClick={goToCheckout}
             >
-              Checkout
+              {t('menu.checkout')}
             </button>
             {cart.length > 0 && (
               <button className="CartClearBtn" onClick={removeWholeCart}>
-                Clear cart
+                {t('menu.clear_cart')}
               </button>
             )}
           </div>

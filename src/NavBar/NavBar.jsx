@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
-
+import { useTranslation } from 'react-i18next';
 
 
 export default function NavBar({ cartCount, onCartOpen }) {
@@ -11,6 +11,7 @@ export default function NavBar({ cartCount, onCartOpen }) {
 
 
   const { user } = useContext(AuthContext)
+  const { t, i18n } = useTranslation();
   return (
     <header className="NavBar">
       <div className="NavBrand">
@@ -18,8 +19,8 @@ export default function NavBar({ cartCount, onCartOpen }) {
         <Link to='/' className="NavName">Matcha & Co.</Link>
       </div>
       <div className='NavOptions'>
-        <Link to='/menu'>Our Menu</Link>
-        <Link to="/contact">Contact</Link>
+        <Link to='/menu'>{t('nav.menu')}</Link>
+        <Link to="/contact">{t('nav.contact')}</Link>
         {user ? (
           <div className="NavUser">
             <img src={user.photo} alt={user.displayName} className="NavUserPhoto" />
@@ -31,6 +32,17 @@ export default function NavBar({ cartCount, onCartOpen }) {
             Sign in with Google
           </a>
         )}
+        <div className="LangSwitcher">
+          {['en', 'vi', 'zh'].map((lang) => (
+            <button
+              key={lang}
+              className={`LangBtn ${i18n.language === lang ? 'LangBtnActive' : ''}`}
+              onClick={() => i18n.changeLanguage(lang)}
+            >
+              {lang === 'en' ? 'English' : lang === 'vi' ? 'Tiếng Việt' : '中文'}
+            </button>
+          ))}
+        </div>
       </div>
       <div className='NavCartSlot'>
         {onCartOpen && (

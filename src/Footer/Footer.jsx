@@ -1,8 +1,11 @@
 import "./Footer.css"
 import { Link } from "react-router-dom"
 import { FaFacebook, FaInstagram, FaGoogle, FaYelp } from "react-icons/fa"
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <section className="Footer">
       <div id="BrandNameColumn">
@@ -10,7 +13,7 @@ export default function Footer() {
       </div>
 
       <div id="SocialMediaColumn">
-        <p>Follow Us</p>
+        <p>{t('footer.follow')}</p>
         <div className="icons">
           <a href="https://www.facebook.com" target="_blank" className="icon icon--facebook">
             <FaFacebook />
@@ -28,11 +31,11 @@ export default function Footer() {
       </div>
 
       <div id="QuestionsColumn">
-        <p>Questions or Concerns?</p>
+        <p>{t('footer.questions')}</p>
         <p>
-          <Link to="/contact">Visit our Contact page</Link>
+          <Link to="/contact">{t('footer.contact_link')}</Link>
         </p>
-        <p>© 2026 Matcha & Co. All rights reserved.</p>
+        <p>{t('footer.copyright')}</p>
       </div>
     </section>
   )

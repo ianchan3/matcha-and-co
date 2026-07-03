@@ -2,6 +2,7 @@ import "./SuccessPage.css";
 import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
+import { useTranslation } from 'react-i18next';
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4242";
 
@@ -11,7 +12,7 @@ export default function SuccessPage({ removeWholeCart }) {
   const [error, setError] = useState(null);
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
-
+  const { t } = useTranslation();
 
   useEffect(() => {
     removeWholeCart?.();
@@ -39,19 +40,19 @@ export default function SuccessPage({ removeWholeCart }) {
         {loading ? (
           <>
             <div className="SuccessSpinner" aria-label="Loading order details" />
-            <p className="SuccessLoadingText">Loading your order…</p>
+            <p className="SuccessLoadingText">{t('success.loading')}</p>
           </>
         ) : (
           <>
-            <h1 className="SuccessTitle">Payment was Successful!</h1>
-            <p className="SuccessSubtitle">Thanks for your order. We're getting it ready.</p>
+            <h1 className="SuccessTitle">{t('success.title')}</h1>
+            <p className="SuccessSubtitle">{t('success.subtitle')}</p>
 
             {error ? (
               <p className="SuccessError">Could not load order details — but your payment went through.</p>
             ) : (
               <>
-                <p className="SuccessRef">Receipt #: <strong>#{orderData.orderRef}</strong></p>
-                <p className="SuccessPickup">Show this receipt or give your name — <strong>{orderData.customerName ?? 'your name'}</strong> — at pickup.</p>
+                <p className="SuccessRef">{t('success.receipt')} <strong>#{orderData.orderRef}</strong></p>
+                <p className="SuccessPickup">{t('success.pickup')} — <strong>{orderData.customerName ?? 'your name'}</strong></p>
                 <ul className="SuccessItemsList">
                   {orderData.items.map((item, i) => (
                     <li key={i} className="SuccessItem">
@@ -63,13 +64,13 @@ export default function SuccessPage({ removeWholeCart }) {
                   ))}
                 </ul>
                 <div className="SuccessTotal">
-                  <span>Total</span>
+                  <span>{t('success.total')}</span>
                   <span>${(orderData.amountTotalCents / 100).toFixed(2)}</span>
                 </div>
               </>
             )}
 
-            <Link to="/menu" className="SuccessBackBtn">Back to menu</Link>
+            <Link to="/menu" className="SuccessBackBtn">{t('success.back')}</Link>
           </>
         )}
       </div>

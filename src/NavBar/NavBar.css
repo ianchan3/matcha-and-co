@@ -55,6 +55,7 @@ a {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   transition: background 0.15s ease;
 }
+
 .CartToggleBtn:hover {
   background: var(--color-sage-dark);
 }
@@ -183,4 +184,53 @@ a {
   background: var(--color-sage);
   color: white;
   border-color: var(--color-sage);
+}
+
+@media (max-width: 1000px) {
+  .NavBar {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .NavBar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .NavOptions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .NavName {
+    font-size: 18px;
+  }
+
+  .NavTagline {
+    font-size: 12px;
+  }
+}
+
+
+
+.NavRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
+}
+
+.HamburgerBtn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--color-text);
 }

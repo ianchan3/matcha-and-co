@@ -106,3 +106,9 @@
   30% { transform: rotate(15deg); }
   40% { transform: rotate(-15deg); }
 }
+
+@media (max-width: 1000px) {
+  .Footer {
+    grid-template-columns: 1fr;
+  }
+}

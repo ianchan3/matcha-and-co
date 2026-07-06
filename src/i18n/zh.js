@@ -68,6 +68,7 @@ export default {
     copyright: "© 2026 Matcha & Co. 版權所有。",
   },
   orders: {
+    reorder: "重新訂購",
     heading: "訂單記錄",
     subtitle: "您的近期訂單。",
     empty: "您尚未下任何訂單。",

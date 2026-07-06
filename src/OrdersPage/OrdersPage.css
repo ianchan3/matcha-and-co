@@ -116,6 +116,23 @@
   background: var(--color-sage-dark);
 }
 
+.ReorderBtn {
+  margin-top: 12px;
+  background: var(--color-sage);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ReorderBtn:hover {
+  background: var(--color-sage-dark);
+}
+
 @media (max-width: 600px) {
   .OrdersContainer {
     margin: 24px auto;

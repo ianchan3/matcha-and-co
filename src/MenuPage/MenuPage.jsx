@@ -26,12 +26,12 @@ export default function MenuPage({
   const cartTotalCents = cart.reduce((sum, x) => sum + x.priceCents * x.qty, 0);
 
   const menuItems = [
-    { id: "matcha", name: "Matcha Latte", priceCents: 799, photo: MatchaLatte, description: t("menu.items.matcha_desc")},
-    { id: "blueberrymatcha", name: "Blueberry Matcha", priceCents: 999, photo: BlueberryMatcha, description: t("menu.items.blueberry_desc") },
-    { id: "strawberrymatcha", name: "Strawberry Matcha", priceCents: 999, photo: StrawberryMatcha, description: t("menu.items.strawberry_desc") },
-    { id: "bananamatcha", name: "Banana Matcha", priceCents: 999, photo: BananaMatcha, description: t("menu.items.banana_desc") },
-    { id: "mangomatcha", name: "Mango Matcha", priceCents: 999, photo: MangoMatcha, description: t("menu.items.mango_desc") },
-    { id: "coconutmatcha", name: "Coconut Matcha", priceCents: 999, photo: CoconutMatcha, description: t("menu.items.coconut_desc") },
+    { id: "Matcha Latte", name: "Matcha Latte", priceCents: 799, photo: MatchaLatte, description: t("menu.items.matcha_desc")},
+    { id: "Blueberry Matcha", name: "Blueberry Matcha", priceCents: 999, photo: BlueberryMatcha, description: t("menu.items.blueberry_desc") },
+    { id: "Strawberry Matcha", name: "Strawberry Matcha", priceCents: 999, photo: StrawberryMatcha, description: t("menu.items.strawberry_desc") },
+    { id: "Banana Matcha", name: "Banana Matcha", priceCents: 999, photo: BananaMatcha, description: t("menu.items.banana_desc") },
+    { id: "Mango Matcha", name: "Mango Matcha", priceCents: 999, photo: MangoMatcha, description: t("menu.items.mango_desc") },
+    { id: "Coconut Matcha", name: "Coconut Matcha", priceCents: 999, photo: CoconutMatcha, description: t("menu.items.coconut_desc") },
   ]
 
   //making sure that activeItemId actually matches an item in the menuItems array

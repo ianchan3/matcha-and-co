@@ -2,16 +2,24 @@ import "./OrdersPage.css";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:4242";
 
-export default function OrdersPage() {
+export default function OrdersPage({ addToCart }) {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { t } = useTranslation();
+
+  function reorder(items) {
+    items.forEach((item) => {
+      addToCart({...item, id: item.name}, item.qty)
+    })
+    navigate("/menu")
+  }
 
   useEffect(() => {
     fetch(`${apiUrl}/orders`, { credentials: "include" })
@@ -56,11 +64,13 @@ export default function OrdersPage() {
                   <span>{t('orders.total')}</span>
                   <span>${(order.amountTotalCents / 100).toFixed(2)}</span>
                 </div>
+                <button className="ReorderBtn" onClick={() => reorder(order.items)}>
+                  {t('orders.reorder')}
+                </button>
               </div>
             ))}
           </div>
         )}
-
         <Link to="/menu" className="OrdersBackBtn">{t('orders.back')}</Link>
       </div>
       <Footer />

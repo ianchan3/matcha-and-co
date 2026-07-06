@@ -54,6 +54,7 @@ export async function stripeWebhook(req, res) {
 
         const order = await Order.create({
           stripeSessionId: session.id,
+          userId: attempt.userId ?? null,
           paymentIntentId: session.payment_intent,
           receiptNumber,
           customerName,

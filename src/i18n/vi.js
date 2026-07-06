@@ -2,6 +2,7 @@ export default {
   nav: {
     menu: "Thực Đơn",
     contact: "Liên Hệ",
+    orders: "Đơn Hàng Của Tôi",
   },
   home: {
     heading: "Matcha, Tinh Tế Từng Ly",
@@ -67,4 +68,16 @@ export default {
     contact_link: "Truy cập trang Liên Hệ",
     copyright: "© 2026 Matcha & Co. Bảo lưu mọi quyền.",
   },
+  orders: {
+    heading: "Lịch Sử Đơn Hàng",
+    subtitle: "Các đơn hàng gần đây của bạn.",
+    empty: "Bạn chưa đặt đơn hàng nào.",
+    receipt: "Biên Lai #",
+    total: "Tổng Cộng",
+    status: "Trạng Thái",
+    items: "Món",
+    back: "Quay Lại Thực Đơn",
+    loading: "Đang tải đơn hàng…",
+    error: "Không thể tải đơn hàng.",
+  }
 };

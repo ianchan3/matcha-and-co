@@ -40,6 +40,7 @@ export async function create(req, res) {
 
     await CheckoutAttempt.create({
       stripeSessionId: session.id,
+      userId: req.user?._id ?? null,
       cart,
       status: "pending",
     });

@@ -2,6 +2,7 @@ export default {
   nav: {
     menu: "菜單",
     contact: "聯絡我們",
+    orders: "我的訂單",
   },
   home: {
     heading: "抹茶，用心調製",
@@ -66,4 +67,16 @@ export default {
     contact_link: "前往聯絡頁面",
     copyright: "© 2026 Matcha & Co. 版權所有。",
   },
+  orders: {
+    heading: "訂單記錄",
+    subtitle: "您的近期訂單。",
+    empty: "您尚未下任何訂單。",
+    receipt: "收據 #",
+    total: "總計",
+    status: "狀態",
+    items: "品項",
+    back: "返回菜單",
+    loading: "載入訂單中…",
+    error: "無法載入訂單。",
+  }
 };

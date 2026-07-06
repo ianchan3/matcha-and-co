@@ -19,6 +19,7 @@ export default function NavBar({ cartCount, onCartOpen }) {
         <Link to='/' className="NavName">Matcha & Co.</Link>
       </div>
       <div className='NavOptions'>
+        {user && <Link to='/orders'>{t('nav.orders')}</Link> }
         <Link to='/menu'>{t('nav.menu')}</Link>
         <Link to="/contact">{t('nav.contact')}</Link>
         {user ? (

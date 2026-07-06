@@ -5,6 +5,7 @@ import MenuPage from "./MenuPage/MenuPage";
 import HomePage from "./HomePage/HomePage";
 import SuccessPage from "./SuccessPage/SuccessPage";
 import ContactPage from "./ContactPage/ContactPage";
+import OrdersPage from "./OrdersPage/OrdersPage";
 import { Toaster, toast } from 'sonner'
 import './App.css'
 import { Routes, Route } from "react-router-dom";
@@ -81,6 +82,7 @@ function App() {
       const res = await fetch(`${apiUrl}/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           cart, origin: window.location.origin,
         }),
@@ -123,6 +125,7 @@ function App() {
         <ScrollToTop />
         <Routes id="routes">
           <Route path="/" element={<HomePage />} />
+          <Route path="/orders" element={<OrdersPage />} />
           <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} isCheckingOut={isCheckingOut} />} />
           <Route path="/success" element={<SuccessPage removeWholeCart={removeWholeCart} />} />
           <Route path="/contact" element={<ContactPage />} />

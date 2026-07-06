@@ -12,6 +12,7 @@ const OrderItemSchema = new mongoose.Schema(
 const OrderSchema = new mongoose.Schema(
   {
     stripeSessionId: { type: String, required: true, unique: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     paymentIntentId: { type: String },
     receiptNumber: {type: String},
     customerName: {type: String},

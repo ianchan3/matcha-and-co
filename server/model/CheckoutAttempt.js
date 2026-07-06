@@ -12,6 +12,7 @@ const CartItemSchema = new mongoose.Schema(
 const CheckoutAttemptSchema = new mongoose.Schema(
   {
     stripeSessionId: { type: String, required: true, unique: true, index: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     cart: { type: [CartItemSchema], required: true },
     status: { type: String, enum: ["pending", "succeeded", "failed"], default: "pending" },
   },

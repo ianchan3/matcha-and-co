@@ -2,6 +2,7 @@ export default {
   nav: {
     menu: "Our Menu",
     contact: "Contact",
+    orders: "My Orders"
   },
   home: {
     heading: "Matcha, Crafted with Intention",
@@ -66,4 +67,16 @@ export default {
     contact_link: "Visit our Contact page",
     copyright: "© 2026 Matcha & Co. All rights reserved.",
   },
+  orders: {
+    heading: "Order History",
+    subtitle: "Your recent orders.",
+    empty: "You haven't placed any orders yet.",
+    receipt: "Receipt #",
+    total: "Total",
+    status: "Status",
+    items: "Items",
+    back: "Back to menu",
+    loading: "Loading your orders…",
+    error: "Could not load orders.",
+  }
 };

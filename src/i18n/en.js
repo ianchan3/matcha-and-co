@@ -68,6 +68,7 @@ export default {
     copyright: "© 2026 Matcha & Co. All rights reserved.",
   },
   orders: {
+    reorder: "Reorder",
     heading: "Order History",
     subtitle: "Your recent orders.",
     empty: "You haven't placed any orders yet.",

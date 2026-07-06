@@ -69,6 +69,7 @@ export default {
     copyright: "© 2026 Matcha & Co. Bảo lưu mọi quyền.",
   },
   orders: {
+    reorder: "Đặt Lại",
     heading: "Lịch Sử Đơn Hàng",
     subtitle: "Các đơn hàng gần đây của bạn.",
     empty: "Bạn chưa đặt đơn hàng nào.",

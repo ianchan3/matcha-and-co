@@ -125,7 +125,7 @@ function App() {
         <ScrollToTop />
         <Routes id="routes">
           <Route path="/" element={<HomePage />} />
-          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/orders" element={<OrdersPage addToCart={addToCart} />} />
           <Route path="/menu" element={<MenuPage cart={cart} addToCart={addToCart} goToCheckout={goToCheckout} removeFromCart={removeFromCart} decreaseCartQty={decreaseCartQty} increaseCartQty={increaseCartQty} removeWholeCart={removeWholeCart} isCheckingOut={isCheckingOut} />} />
           <Route path="/success" element={<SuccessPage removeWholeCart={removeWholeCart} />} />
           <Route path="/contact" element={<ContactPage />} />

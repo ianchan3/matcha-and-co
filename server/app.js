@@ -34,14 +34,16 @@ app.use(
   })
 );
 
+const isHttps = process.env.NODE_ENV === 'production' || process.env.HTTPS === 'true';
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: process.env.MONGODB_URI ? MongoStore.create({ mongoUrl: process.env.MONGODB_URI }) : undefined,
   cookie: {
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    secure: process.env.NODE_ENV === 'production' ? true : false,
+    sameSite: isHttps ? 'none' : 'lax',
+    secure: isHttps ? true : false,
     maxAge: 24 * 60 * 60 * 1000
   }
 }))

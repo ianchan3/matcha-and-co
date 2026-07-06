@@ -440,7 +440,7 @@
   color: var(--color-text);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   #MenuItemsListContainer {
     padding: 24px 12px 40px;
   }
@@ -452,7 +452,7 @@
   #MenuItemsList {
     grid-template-columns: 1fr;
   }
-
+  
   .CartDrawer {
     width: 100%;
   }

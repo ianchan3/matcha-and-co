@@ -18,7 +18,7 @@ export default function HomePage() {
         <section className="Introduction">
           <div className="IntroImage">
             <img
-              src="https://images.pexels.com/photos/5976079/pexels-photo-5976079.jpeg"
+              src="./Matcha.jpg"
               alt="Person whisking matcha"
             />
           </div>

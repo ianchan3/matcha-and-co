@@ -20,6 +20,13 @@ const OrderSchema = new mongoose.Schema(
     amountTotalCents: { type: Number, required: true },
     currency: { type: String, default: "usd" },
     status: { type: String, enum: ["paid", "refunded"], default: "paid" },
+    fulfillmentStatus: {
+      type: String,
+      enum: ["pending", "in_progress", "completed", "cancelled"],
+      default: "pending",
+    },
+    refundedAt: { type: Date },
+    refundId: { type: String },
   },
   { timestamps: true }
 );
